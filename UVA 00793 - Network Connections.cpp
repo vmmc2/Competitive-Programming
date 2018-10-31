@@ -2,8 +2,8 @@
 
 using namespace std;
 
-int vetor[1000];
-int size[1000];
+int vetor[100001];
+int size[100001];
 
 void initialize(int n){
     for(int i = 1; i <= n; i++){ //Indexado na base 1 ate N
@@ -33,6 +33,9 @@ bool find(int a, int b){
 void weighted_union(int a, int b){
     int root_A = root(a);
     int root_B = root(b);
+    if(root_A == root_B){
+        return;
+    }
     if(size[root_A] < size[root_B]){
         vetor[root_A] = vetor[root_B];
         size[root_B] += size[root_A];
@@ -73,10 +76,9 @@ int main(){
                 }
             }
         }
-        if(numcasos != 1){
-            printf("\n");
-        }
+        
         printf("%d,%d\n",yes,no);
+        if(numcasos) printf("\n");
     }
     return 0;
 }
