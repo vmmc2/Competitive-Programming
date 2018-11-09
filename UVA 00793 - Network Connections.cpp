@@ -50,7 +50,8 @@ int main(){
     bool answer;
     int yes, no;
     string s;
-    int c, x, y;
+    char c;
+    int x, y;
     int numcasos, pc;
     scanf("%d", &numcasos);
     while(numcasos--){
