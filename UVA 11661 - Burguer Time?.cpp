@@ -22,28 +22,31 @@ int main(){
             highway.push_back(aux);
         }
         for(int i = 0; i < highway.size(); i++){
+            
             if(highway[i] == 'Z'){
                 flag = 1;
                 break;
             }
             if(highway[i] == 'R' || highway[i] == 'D'){
-                    if(flag1 == 0){
+                if(flag1 == 0){
+                    mark1 = highway[i];
+                    partida = i;
+                    flag1 = 1;
+                }
+                else if(flag1 == 1){
+                    if(highway[i] == mark1){
+                        partida = i;
+                    }
+                    if(highway[i] != mark1){
+                        dist = i - partida;
+                        //printf("partida: %d -- chegada: %d --- dist: %d\n", partida, i, dist);
+                        if(minimum > dist){
+                            minimum = dist;
+                        }
                         mark1 = highway[i];
                         partida = i;
-                        flag1 = 1;
                     }
-                    else if(flag1 == 1){
-                        if(highway[i] == mark1){
-                            partida = i;
-                        }
-                        if(highway[i] != mark1){
-                            dist = i - partida;
-                            if(minimum > dist){
-                                minimum = dist;
-                            }
-                            flag1 = 0;
-                        }
-                    }
+                }
             }
         }
         if(flag == 1){
