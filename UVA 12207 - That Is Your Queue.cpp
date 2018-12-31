@@ -12,7 +12,7 @@ int main(){
     while(numpessoas != 0 && numcomandos != 0){
         //montando a fila
         printf("Case %d:\n", j);
-        for(int i = 1; i <= numpessoas; i++){
+        for(int i = 1; i <= numpessoas && i <= 1000; i++){
             fila.push_back(i);
         }
         //simulando os comandos da fila
