@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+#include <string>
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+
+int main(){
+    map <string,double> dictionary;
+    int numpalavras;
+    double total;
+    int guesses;
+    string aux;
+    string expression;
+    int num2;
+    int num;
+    cin >> numpalavras >> guesses;
+    for(int i = 1; i <= numpalavras; i++){
+        cin >> aux >> num2;
+        dictionary[aux] = num2;
+    }
+    for(int i = 1; i <= guesses; i++){
+        total = 0;
+        getline(cin, expression);
+        stringstream line(expression);
+        printf("Guess #%d: ", i);
+        while(line >> expression){
+            if(expression == "+"){
+                continue;
+            }
+            if(expression == "<"){
+                line >> num;
+                if(total < num){
+                  printf("was correct.\n");
+                }
+                else{
+                  printf("was incorrect.\n");
+                }
+                break;
+            }
+            if(expression == ">"){
+                line >> num;
+                if(total > num){
+                  printf("was correct.\n");
+                }
+                else{
+                  printf("was incorrect.\n");
+                }
+                break;
+            }
+            if(expression == ">="){
+                line >> num;
+                if(total >= num){
+                  printf("was correct.\n");
+                }
+                else{
+                  printf("was incorrect.\n");
+                }
+                break;
+            }
+            if(expression == "<="){
+                line >> num;
+                if(total <= num){
+                  printf("was correct.\n");
+                }
+                else{
+                  printf("was incorrect.\n");
+                }
+                break;
+            }
+            total += dictionary[expression];
+        }
+    }
+    return 0;
+}
