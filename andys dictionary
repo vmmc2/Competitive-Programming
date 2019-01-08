@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+#include <ctype.h>
+
+using namespace std;
+
+int main(){
+    set <string> dictionary;
+    string aux2;
+    char aux;
+    string definitive = "";
+    while(getline(cin, aux2)){
+        if(aux2.compare("") == 0){
+                dictionary.insert(definitive);
+                definitive = "";
+            }
+        else{
+            for(int i = 0; i < aux2.length(); i++){
+                aux = aux2[i];
+                if(aux == ' '){
+                    dictionary.insert(definitive);
+                    definitive = "";
+                }
+                if(aux == '\n'){
+                    dictionary.insert(definitive);
+                    definitive = "";
+                }
+                if(((int)aux >= 65 && (int)aux <= 90) || ((int)aux >= 97 && (int)aux <= 122)){
+                    aux = tolower(aux);
+                    definitive += aux;
+                }
+            }
+        }
+    }
+    for(set<string>:: iterator it = dictionary.begin(); it != dictionary.end(); ++it){
+        cout << *it << endl;
+    }
+    return 0;
+}
