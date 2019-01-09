@@ -1,0 +1,110 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    int numcasos;
+    int battlefields;
+    int greenarmy;
+    int bluearmy;
+    int aux;
+    priority_queue <int> GA;
+    priority_queue <int> BA;
+    vector <pair<int,int>> BF;
+    pair<int,int> auxiliar;
+    int maxdecampos;
+    int danogreen, danoblue;
+    scanf("%d", &numcasos);
+    for(int i = 1; i <= numcasos; i++){
+        scanf("%d %d %d", &battlefields, &greenarmy, &bluearmy);
+        for(int j = 1; j <= greenarmy; j++){
+            scanf("%d", &aux);
+            GA.push(aux);
+        }
+        for(int j = 1; j <= bluearmy; j++){
+            scanf("%d", &aux);
+            BA.push(aux);
+        }
+        //Comecou o parangole
+        while(true){
+            if(BA.empty() || GA.empty()){
+                break;
+            }
+            if(battlefields > BA.size() || battlefields > GA.size()){
+                maxdecampos = min(BA.size(), GA.size());
+            }
+            else{
+                maxdecampos = battlefields;
+            }
+            for(int j= 1; j <= maxdecampos; j++){
+                auxiliar.first = GA.top();
+                auxiliar.second = BA.top();
+                GA.pop();
+                BA.pop();
+                BF.push_back(auxiliar);
+            }
+            for(int j = 0; j < auxiliar.size(); j++){
+                danogreen = auxiliar[j].first;
+                danoblue = auxiliar[j].second;
+                auxiliar[j].first -= danoblue;
+                auxiliar[j].second -= danogreen;
+                if(auxiliar[j].first > 0){
+                    GA.push(auxiliar[j].first);
+                }
+                if(auxiliar[j].second > 0){
+                    BA.push(auxiliar[j].second);
+                }
+            }
+            BF.clear();
+        }
+        if(BA.empty() && GA.empty()){
+            printf("green and blue died\n\n");
+        }
+        else if(!GA.empty() && BA.empty()){
+            printf("green wins\n");
+            vector<int> answer;
+            int dale;
+            while(!GA.empty()){
+                dale = GA.top();
+                answer.push_back(dale);
+                GA.pop();
+            }
+            stable_sort(answer.begin(), answer.end());
+            for(int k = 0 ; k < answer.size(); k++){
+                if(k < answer.size()-1){
+                    printf("%d\n", answer[k]);
+                }
+                else{
+                    printf("%d\n\n", answer[k]);
+                }
+            }
+        }
+        else if(!BA.empty() && GA.empty()){
+            printf("blue wins\n");
+            vector<int> answer;
+            int dale;
+            while(!BA.empty()){
+                dale = BA.top();
+                answer.push_back(dale);
+                BA.pop();
+            }
+            stable_sort(answer.begin(), answer.end());
+            for(int k = 0 ; k < answer.size(); k++){
+                if(k < answer.size()-1){
+                    printf("%d\n", answer[k]);
+                }
+                else{
+                    printf("%d\n\n", answer[k]);
+                }
+            }
+        }
+        while(!GA.empty){
+            GA.pop();
+        }
+        while(!BA.empty()){
+            BA.pop();
+        }
+        BF.clear();
+    }
+    return 0;
+}
