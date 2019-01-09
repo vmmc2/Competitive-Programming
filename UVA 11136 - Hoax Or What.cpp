@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 #include <string>
 #include <iostream>
@@ -13,7 +14,7 @@ int main(){
     multiset <int>:: iterator it;
     int maior;
     int menor;
-    int resposta;
+    long long resposta;
     int numdays;
     int numbills;
     int aux;
@@ -37,8 +38,10 @@ int main(){
             collection.erase(it);
             resposta += (maior - menor);
         }
-        printf("%d\n", resposta);
+        printf("%lld\n", resposta);
         collection.clear();
     }
     return 0;
 }
+
+
