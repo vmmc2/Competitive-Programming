@@ -39,13 +39,15 @@ void weigthed_union(int a, int b){
         dsu[root_A] = dsu[root_B];
         size[root_B] += size[root_A];
         //printf("money(b): %d   --- dict(a): %d\n", money[root_B], dictionary[root_A]);
-        money[root_B] += dictionary[root_A];
+        money[root_B] += money[root_A];
+        money[root_A] = 0;
     }
     else{
         dsu[root_B] = dsu[root_A];
         size[root_A] += size[root_B];
         //printf("money(a): %d   --- dict(b): %d\n", money[root_A], dictionary[root_B]);
-        money[root_A] += dictionary[root_B];
+        money[root_A] += money[root_B];
+        money[root_B] = 0;
     }
 }
 int num_elements(int x){
@@ -69,7 +71,6 @@ int main(){
         scanf("%d %d", &numfriends, &numrelations);
         for(int j = 1; j <= numfriends; j++){
             scanf("%d", &iowa);
-            dictionary[aux] = iowa;
             money[aux] = iowa;
             aux++;
         }
@@ -80,7 +81,7 @@ int main(){
         //printf("Caso %d:\n", i);
         for(int j = 0; j < numfriends; j++){
             //printf("root: %d --- money: %d\n", root(j), money[root(j)]);
-            if(money[root(j)] != 0){
+            if(money[j] != 0){
                 flag = 1;
             }
         }
@@ -91,7 +92,6 @@ int main(){
         else{
             printf("POSSIBLE\n");
         }
-        
     }
     return 0;
 }
