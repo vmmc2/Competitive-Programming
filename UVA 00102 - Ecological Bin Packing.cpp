@@ -4,17 +4,13 @@
 using namespace std;
 
 int main(){
-    vector <int> registro;
+    int registro[9];
     vector<pair<int,string>> answer;
     int bcg = 0, bgc = 0, cbg = 0, cgb = 0, gbc = 0, gcb = 0;
     int auxiliar;
     string aux;
     stringstream ss;
-    while(getline(cin,aux)){
-        ss << aux;
-        while(ss >> auxiliar){
-            registro.push_back(auxiliar);
-        }
+    while(cin >> registro[0] >> registro[1] >> registro[2] >> registro[3] >> registro[4] >> registro[5] >> registro[6] >> registro[7] >> registro[8]){
         bcg = registro[3] + registro[6] + registro[2] + registro[8] + registro[1] + registro[4];
         bgc = registro[3] + registro[6] + registro[1] + registro[7] + registro[2] + registro[5];
         cbg = registro[5] + registro[8] + registro[0] + registro[6] + registro[1] + registro[4];
@@ -27,13 +23,9 @@ int main(){
         answer.push_back({cgb,"CGB"});
         answer.push_back({gbc,"GBC"});
         answer.push_back({gcb,"GCB"});
-        for(int i = 0; i < (int)answer.size(); i++){
-            printf("%d ", answer[i].first);
-        }
-        printf("\n");
+        
         sort(answer.begin(), answer.end());
         cout << answer[0].second << " " << answer[0].first << endl;
-        registro.clear();
         answer.clear();
     }
     return 0;
