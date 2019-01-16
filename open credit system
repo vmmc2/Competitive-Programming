@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+#include <sstream>
+
+using namespace std;
+
+int main(){
+    int numcasos;
+    vector <int> dados;
+    int aux;
+    int numstudents;
+    int maior, menor, until;
+    scanf("%d", &numcasos);
+    for(int i = 1; i <= numcasos; i++){
+        scanf("%d", &numstudents);
+        for(int j = 1; j <= numstudents; j++){
+            scanf("%d", &aux);
+            dados.push_back(aux);
+        }
+        maior = -99999999;
+        menor = 99999999;
+        until = -9999999;
+        for(int j = 0; j < (int)dados.size(); j++){
+            if(dados[j] > maior){
+                if(j > 0){
+                    if(maior - dados[j] > until){
+                        until = maior - dados[j];
+                    }
+                }
+                maior = dados[j];
+            }
+            if(dados[j] < menor){
+                menor = dados[j];
+                if(j > 0){
+                    if(maior - menor > until){
+                        until = maior - menor;
+                    }
+                }    
+            }
+        }
+        printf("%d\n", until);
+        dados.clear();
+    }
+    return 0;
+}
