@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+#include <math.h>
+#include <sstream>
+#include <string.h>
+
+using namespace std;
+
+int checadigito(int i){
+    int digits = 1;
+    while(true){
+        i = i/10;
+        if(i%10 == 0){
+            break;
+        }
+        digits++;
+    }
+    return digits;
+}
+void montastring(int i, int qtdigitos, int numdigits){
+    string str;
+    str.resize(numdigits, '0');
+}
+
+int main(){
+    int numdigits;
+    int digito;
+    while(scanf("%d", &numdigits) != EOF){
+        if(numdigits == 2){
+            for(int i = 0; i <= 99; i++){
+                digito = checadigito(i);
+                montastring(i, digito, numdigits);
+            }
+        }
+        if(numdigits == 4){
+            for(int i = 0; i <= 9999; i++){
+                digito = checadigito(i);
+                montastring(i, digito, numdigits);
+            }
+        }
+        if(numdigits == 6){
+            for(int i = 0; i <= 999999; i++){
+                digito = checadigito(i);
+                montastring(i, digito, numdigits);
+            }
+        }
+        if(numdigits == 8){
+            for(int i = 0; i <= 99999999; i++){
+                digito = checadigito(i);
+                montastring(i, digito, numdigits);
+            }
+        }
+    }
+    return 0;
+}
