@@ -15,18 +15,18 @@ int main(){
     vector <int>:: iterator it;
     scanf("%d", &numcasos);
     for(int i = 1; i <= numcasos; i++){
-        answer = 99999999;
         scanf("%d", &numcasas);
         for(int j = 1; j <= numcasas; j++){
             scanf("%d", &aux);
             houses.push_back(aux);
         }
         stable_sort(houses.begin(), houses.end());
-        it = unique(houses.begin(), houses.end());
-        houses.resize(std::distance(houses.begin(), it));
         answer = 0;
-        mediana = houses[floor(houses.size()/2)];
+        mediana = houses[(int)houses.size()/2];
         for(int j = 0; j < houses.size(); j++){
+            if(mediana == houses[j]){
+                continue;
+            }
             answer += abs(mediana - houses[j]);
         }
         printf("%d\n", answer);
