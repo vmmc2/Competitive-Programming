@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+#include <string.h>
+
+using namespace std;
+
+int main(){
+    int ouro;
+    int number;
+    int caso = 1;
+    int ok = 0;
+    int tam;
+    int cursor;
+    int caminhada;
+    char numero[10];
+    int tabelafreq[10];
+    int inicial;
+    int fodac;
+    int flag = 1;
+    map <char,int> dictionary;
+    set <int> registro;
+    while(scanf("%d", &number) && number){
+        ok = 0;
+        while(true){
+            flag = 1;
+            memset(tabelafreq, 0, sizeof(tabelafreq));
+            sprintf(numero, "%d", number);
+            tam = strlen(numero);
+            for(int i = 0; i < tam; i++){
+                tabelafreq[numero[i]] += 1;
+                if(tabelafreq[numero[i]] > 1){//o numero tem digitos repetidos. nao pode usar
+                    
+                }
+            }
+            for(int i = 0; i < tam; i++){
+                printf("%d\n", tabelafreq[i]);
+            }
+            //marcando cada um dos digitos no dicionario pra eu ter nocao de quais eu ja usei e de quais eu n usei
+            for(int i = 0; i < tam; i++){
+                dictionary[numero[i]] = 0;
+            }
+            inicial = 0;
+            ouro = numero[0];
+            fodac = 0;
+            while(true){
+                cursor = numero[inicial]; //pegando o primeiro digito
+                if(cursor == ouro && fodac > 0){
+                    if(registro.size() == tam){
+                        goto iowa;
+                    }
+                }
+                if(dictionary[cursor] > 1){// deu merda
+                    break;
+                }
+                else{
+                    dictionary[cursor]++;
+                    registro.insert(inicial);
+                }
+                caminhada = cursor;
+                inicial = (inicial + numero[inicial])%tam;
+                fodac++;
+            }
+            number++;
+            dictionary.clear();
+            registro.clear();
+        }
+        iowa:
+        printf("Case %d: %s\n", caso, numero);
+        caso++;
+    }
+    return 0;
+}
