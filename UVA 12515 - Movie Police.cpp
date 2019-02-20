@@ -7,7 +7,7 @@ int main(){
     vector <string> c;
     string aux, aux2;
     int movies, clips;
-    int repeticoes, marcador, mark, misera;
+    int repeticoes, marcador, mark;
     int contador;
     int i;
     int answer = 0, indmaior;
@@ -21,34 +21,33 @@ int main(){
         cin >> aux;
         c.push_back(aux);
     }
-    for(int j = 0; j < (int) c.size(); j++){
-        answer = 0;
+    for(int j = 0; j < clips; j++){
+        answer = (int) 1e9;
         aux = c[j];
-        for(int k = 0; k < (int) m.size(); k++){
+        for(int k = 0; k < movies; k++){
             aux2 = m[k];
             if(aux.length() > aux2.length()){
                 continue;
             }
             else{
-                repeticoes = fabs(aux2.length() - aux.length());
-                repeticoes++;
-                //cout << repeticoes << endl;
-                for(int a = 1, marcador = 0; a <= repeticoes; a++, marcador++){
+                repeticoes = aux2.length() - aux.length();
+                int cur = (int) 1e9;
+                for(int a = 0; a <= repeticoes; a++){
                     contador = 0;
-                    for(int l = marcador, mark = 0; mark < (int)c.size(); l++, mark++){
-                        if(c[l] == m[l]){
+                    for(int l = 0; l < (int) aux.length(); l++){
+                        if(aux[l] != aux2[l+a]){
                             contador++;
                         }
+                        cur = min(cur, contador);
                     }
-                    printf("contador: %d\n", contador);
-                    if(contador > answer){
+                    if(contador < answer){
                         answer = contador;
                         indmaior = k;
                     }
                 }
             }
         }
-        printf("%d\n", indmaior);
+        printf("%d\n", indmaior + 1);
     }
     return 0;
 }
