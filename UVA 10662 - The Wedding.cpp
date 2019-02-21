@@ -21,6 +21,7 @@ int main(){
     int aux, soma;
     while(scanf("%d %d %d", &agencies, &restaurants, &hotels) == 3){
         misera = -1;
+        int ind1, ind2, ind3;
         preprocess();
         soma = (int) 1e8;
         memset(pa, 0, sizeof pa);
@@ -50,12 +51,27 @@ int main(){
         //fim da leitura de dados
         for(int i = 0; i < agencies; i++){
             for(int j = 0; j < restaurants; j++){
-                for(int k = 0; k < hotels; k++){
-                    if(da[i][j] == 0 && dr[j][k] == 0 && dh[k][i] == 0)
+                if(da[i][j] != 1){
+                    for(int k = 0; k < hotels; k++){
+                        if(dr[j][k] == 0 && dh[k][i] == 0){
+                            if(pa[i] + pr[j] + ph[k] < soma){
+                                soma = pa[i] + pr[j] + ph[k];
+                                misera = 1;
+                                ind1 = i;
+                                ind2 = j;
+                                ind3 = k;
+                            }
+                        }
+                    }
                 }
             }
         }
+        if(misera == -1){
+            printf("Don't get married!\n");
+        }
+        else{
+            printf("%d %d %d: %d\n", ind1, ind2, ind3, soma);
+        }
     }
-    
     return 0;
 }
