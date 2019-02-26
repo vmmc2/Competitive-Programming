@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+#include <cmath>
+
+using namespace std;
+
+int main(){
+    char grid[120][120];
+    vector <pair<int,int>> ones;
+    vector <pair<int,int>> threes;
+    vector <int> possibles;
+    vector <int> final;
+    int tamanho;
+    int max;
+    int distancia;
+    int disx, disy;
+    while(scanf("%d", &tamanho) != EOF){
+        max = (int) 1e9;
+        ones.clear();
+        final.clear();
+        threes.clear();
+        possibles.clear();
+        memset(grid, 0, sizeof grid);
+        for(int i = 0; i < tamanho; i++){
+            scanf(" %s", grid[i]);
+        }
+        for(int i = 0; i < tamanho; i++){
+            for(int j = 0; j < tamanho; j++){
+                if(grid[i][j] == '1'){
+                    ones.push_back({i,j});
+                }
+            }
+        }
+        for(int i = 0; i < tamanho; i++){
+            for(int j = 0; j < tamanho; j++){
+                if(grid[i][j] == '3'){
+                    threes.push_back({i,j});
+                }
+            }
+        }
+        printf("ones:\n");
+        for(int i = 0 ; i < (int)ones.size(); i++){
+            printf("x: %d --- y: %d\n", ones[i].first, ones[i].second);
+        }
+        printf("threes:\n");
+        for(int i = 0 ; i < (int)threes.size(); i++){
+            printf("x: %d --- y: %d\n", ones[i].first, ones[i].second);
+        }
+        //calculando a minima distancia para que a partir de qualquer celula com 1 seja possivel chegar a uma celula com 3 
+        for(int i = 0; i < (int)ones.size(); i++){
+            for(int j = 0; j < (int)threes.size(); j++){
+                disx = fabs(ones[i].first - threes[j].first);
+                disy = fabs(ones[i].second - threes[j].second);
+                distancia = disx + disy;
+                if(distancia < max){
+                    max = distancia;
+                }
+            }
+            //cout << "max: " << max << endl;
+            final.push_back(max);
+        }
+        stable_sort(final.begin(), final.end());
+        printf("%d\n", final[(int)final.size() - 1]);
+    }
+    return 0;
+}
