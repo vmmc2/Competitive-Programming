@@ -29,7 +29,7 @@ int main(){
     int a, b;
     int numcasos;
     int qtdvertices, arestas, pontospartida;
-    scanf("%d", &numcasos);
+    cin >> numcasos;
     for(int i = 0; i < numcasos; i++){
         answer = 0;
         memset(visitados, 0, sizeof visitados);
@@ -40,15 +40,13 @@ int main(){
             scanf("%d %d", &a, &b);
             adjlist[a].push_back(b);
         }
-        for(int j = 0; j < pontospartida; j++){
-            scanf("%d", &aux);
-            pp.push_back(aux);
-        }
         //Agora eu tenho que rodar uma dfs a partir de todos os pontos de partida para ver quantas peças de domino
         //foram derrubadas no total
-        for(int i = 0; i < pontospartida; i++){
-            aux = pp[i];
-            dfs(aux);
+        for(int j = 0; j < pontospartida; j++){
+            scanf("%d", &aux);
+            if(visitados[aux] == 0){
+                dfs(aux);
+            }    
         }
         printf("%d\n", answer);
     }
