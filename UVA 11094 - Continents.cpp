@@ -13,23 +13,28 @@ int answer;
 char land;
 
 void floodfill(int lin, int col){
+    if(col < 0){
+        col = numcolunas - 1;
+    }
+    if(col >= numcolunas){
+        col = 0;
+    }
+    if(lin < 0 || lin >= numlinhas){
+        return;
+    }
     visitados[lin][col] = 1;
     resposta++;
     int tempx, tempy;
     for(int i = 0; i < 4; i++){
         tempx = lin + dx[i];
         tempy = col + dy[i];
-        if(tempx >= 0 && tempx < numlinhas && tempy == -1){
-            if(grid[tempx][numcolunas - 1] == land){
-                floodfill(tempx, numcolunas - 1);
-            }
+        if(tempy < 0){
+            tempy = numcolunas - 1;
         }
-        if(tempx >= 0 && tempx < numlinhas && tempy >= numcolunas){
-            if(grid[tempx][0] == land){
-                floodfill(tempx, 0);
-            }
+        if(tempy >= numcolunas){
+            tempy = 0;
         }
-        if((tempx >= 0) && (tempy >= 0) && (tempx < numlinhas) && (tempy < numcolunas) && (visitados[tempx][tempy] == 0) && (grid[tempx][tempy] == grid[lin][col])){
+        if((visitados[tempx][tempy] == 0) && (grid[tempx][tempy] == grid[lin][col])){
             floodfill(tempx, tempy);
         }
     }
@@ -38,20 +43,25 @@ void floodfill(int lin, int col){
 void floods(int lin, int col){
     visitados[lin][col] = 2;
     int tempx, tempy;
+    if(col < 0){
+        col = numcolunas - 1;
+    }
+    if(col >= numcolunas){
+        col = 0;
+    }
+    if(lin < 0 || lin >= numlinhas){
+        return;
+    }
     for(int i = 0; i < 4; i++){
         tempx = lin + dx[i];
         tempy = col + dy[i];
-        if((tempx >= 0) && (tempx < numlinhas) && (tempy <= 0)){
-            if(grid[tempx][numcolunas - 1] == land){
-                floods(tempx, numcolunas - 1);
-            }    
+        if(tempy < 0){
+            tempy = numcolunas - 1;
         }
-        if((tempx >= 0) && (tempx < numlinhas) && (tempy == numcolunas)){
-            if(grid[tempx][0] == land){
-                floods(tempx, 0);
-            }    
+        if(tempy >= numcolunas){
+            tempy = 0;
         }
-        if((tempx >= 0) && (tempy >= 0) && (tempx < numlinhas) && (tempy < numcolunas) && (visitados[tempx][tempy] == 0) && (grid[tempx][tempy] == land)){
+        if((visitados[tempx][tempy] == 0) && (grid[tempx][tempy] == land)){
             floods(tempx, tempy);
         }
     }
@@ -61,7 +71,8 @@ void floods(int lin, int col){
 
 int main(){
     while(scanf("%d %d", &numlinhas, &numcolunas) == 2){
-        answer = -1;
+        memset(visitados, 0, sizeof visitados);
+        answer = 0;
         for(int i = 0 ; i < numlinhas; i++){
             for(int j = 0; j < numcolunas; j++){
                 scanf(" %c", &grid[i][j]);
@@ -69,9 +80,8 @@ int main(){
         }
         scanf("%d %d", &px, &py);
         land = grid[px][py];
-        printf("land: %c\n", land);
         floods(px, py);
-        /*for(int i = 0 ; i < numlinhas; i++){
+        for(int i = 0 ; i < numlinhas; i++){
             for(int j = 0; j < numcolunas; j++){
                 if(grid[i][j] == land && visitados[i][j] == 0){
                     resposta = 0;
@@ -81,9 +91,8 @@ int main(){
                     }
                 }
             }
-        }*/
+        }
         printf("%d\n", answer);
-        memset(visitados, 0, sizeof visitados);
     }
     return 0;
 }
