@@ -34,7 +34,7 @@ void floodfill(int lin, int col, char mark){
 void pantera(int lin, int col){
     somador++;
     int tempx, tempy;
-    visitados[lin][col] = 1;
+    visitados[lin][col] = 2;
     if(grid[lin][col - 1] == 'X'){
         flagblack = 1;
     }
@@ -45,18 +45,6 @@ void pantera(int lin, int col){
         flagblack = 1;
     }
     if(grid[lin + 1][col] == 'X'){
-        flagblack = 1;
-    }
-    if(grid[lin + 1][col + 1] == 'X'){
-        flagblack = 1;
-    }
-    if(grid[lin - 1][col - 1] == 'X'){
-        flagblack = 1;
-    }
-    if(grid[lin - 1][col + 1] == 'X'){
-        flagblack = 1;
-    }
-    if(grid[lin + 1][col - 1] == 'X'){
         flagblack = 1;
     }
     //
@@ -72,22 +60,6 @@ void pantera(int lin, int col){
     }
     if(grid[lin + 1][col] == 'O'){
         flagwhite = 1;
-    }
-    if(grid[lin + 1][col + 1] == 'O'){
-        flagwhite = 1;
-    }
-    if(grid[lin - 1][col - 1] == 'O'){
-        flagwhite = 1;
-    }
-    if(grid[lin - 1][col + 1] == 'O'){
-        flagwhite = 1;
-    }
-    if(grid[lin + 1][col - 1] == 'O'){
-        flagwhite = 1;
-    }
-    //Se tiver cercado por tanto peças pretas como brancas, retorna
-    if(flagwhite == 1 && flagblack == 1){
-        return;
     }
     for(int i = 0; i < 4; i++){
         tempx = lin + dx[i];
@@ -140,6 +112,7 @@ int main(){
                 }
             }
         }
+        
         printf("Black %d White %d\n", black, white);
     }
     return 0;
