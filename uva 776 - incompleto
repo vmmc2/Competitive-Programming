@@ -1,0 +1,35 @@
+#include <cstdio>
+#include <cstring>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+char grid[210][210];
+int visitados[210][210];
+char input[210][210];
+int numlinhas, numcolunas;
+int dx[8] = {-1,-1,-1, 0, 0, 1, 1, 1};
+int dy[8] = {-1, 0, 1,-1, 1,-1, 0, 1};
+
+void floodfill(int lin, int col, int i){
+    int tempx, tempy;
+    visitados[lin][col] = 1;
+}
+
+int main(){
+    int sentinela = 0;
+    while(gets(input) && strlen(input) > 0){
+        while(strcmp(input,"%") != 0){
+            numcolunas = strlen(input);
+            strcpy(grid[sentinela], input);
+            sentinela++;
+            gets(input);
+        }
+        numlinhas = sentinela;
+        sentinela = 0;
+        for(int i = 0; i < numlinhas; i++){
+            printf("%s\n", grid[i]);
+        }
+    }
+    return 0;
+}
