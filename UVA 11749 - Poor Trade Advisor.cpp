@@ -13,9 +13,7 @@ int contador;
 void dfs(int x){
     visitados[x] = 1;
     for(int i = 0; i < (int)adjlist[x].size(); i++){
-        //printf("entrei\n");
         int u = adjlist[x][i].first;
-        //printf("u -- visitados[u]: %d --- %d\n", u, visitados[u]);
         int target = adjlist[x][i].second;
         if(visitados[u] == 0 && target == bullseye){
             contador++;
@@ -45,15 +43,10 @@ int main(){
             adjlist[b].push_back({a,peso});
             bullseye = max(bullseye, peso);
         }
-        //printf("bullseye = %d\n", bullseye);
-        //agora vamo ter que rodar a dfs
         for(int i = 1; i <= numcidades; i++){
             if(visitados[i] == 0){
                 contador = 0;
-                //printf("CHAMANDO DFS PARA O %d\n", i);
                 dfs(i);
-                //printf("\n\n");
-                //printf("contador: %d\n", contador);
                 answer = max(answer, contador);
             }
         }
