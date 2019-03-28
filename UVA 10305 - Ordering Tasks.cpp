@@ -2,59 +2,51 @@
 
 using namespace std;
 
-vector <int> adjlist[110];//representacao do grafo
-vector <int> order;
+vector<int> adjlist[110];
 int visitados[110];
+vector<int> answer;
 
-void dfs(int u){
-    visitados[u] = 1;
-    for(int j = 0; j < (int)adjlist[u].size(); j++){
-        int v = adjlist[u][j];
-        if(visitados[v] == 0){
-            dfs(v);
+void preprocess(){
+    for(int i = 0; i < 110; i++){
+        adjlist[i].clear();
+    }
+}
+
+void toposort(int x){
+    int u;
+    visitados[x] = 1;
+    for(int i = 0; i < (int)adjlist[x].size(); i++){
+        u = adjlist[x][i];
+        if(visitados[u] == 0){
+            toposort(u);
         }
     }
-    order.push_back(u);
-    //printf("Dei pushback no %d\n", u);
+    answer.push_back(x);
 }
 
 int main(){
-    int n, m;
-    int i, j;//i = numero de tarefas. // j = numero de relacoes de dependencia
-    while(1){
-        scanf("%d %d", &i, &j);
-        if(i == 0 && j == 0){
-            break;
+    int a, b;
+    int numvertices, numedges;
+    while(true){
+        answer.clear();
+        memset(visitados, 0, sizeof visitados);
+        preprocess();
+        scanf("%d %d", &numvertices, &numedges);
+        if(numvertices == 0 && numedges == 0) break;
+        for(int i = 0; i < numedges; i++){
+            scanf("%d %d", &a, &b);
+            adjlist[a].push_back(b);
         }
-        //montando as arestas do grafo
-        for(int a = 1; a <= j; a++){
-            scanf("%d %d", &n, &m);
-            adjlist[n].push_back(m);
-        }
-        //rodando a dfs
-        for(int a = 1; a <= i; a++){
-            if(visitados[a] == 0){
-                dfs(a);
+        for(int i = 1; i <= numvertices; i++){
+            if(visitados[i] == 0){
+                toposort(i);
             }
         }
-        //printando
-        for(int a = (int)order.size()-1; a >= 0; a--){
-            if(a != 0){
-                printf("%d ", order[a]);
-             }
-            else if(a==0){
-                 printf("%d", order[a]);
-            }
+        for(int a = (int)answer.size()-1; a >= 1; a--){
+            printf("%d ", answer[a]);
         }
-        printf("\n");
-        //zerando as estruturas a cada instancia do problema
-        order.clear();
-        for(int a = 0; a < 110; a++){
-            visitados[a] = 0;
-        }
-        for(int a = 0; a < 110; a++){
-            adjlist[a].clear();
-        }
+        printf("%d\n", answer[0]);
     }
+    
     return 0;
 }
