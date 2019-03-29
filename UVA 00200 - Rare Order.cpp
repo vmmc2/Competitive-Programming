@@ -22,11 +22,6 @@ void toposort(int x){
 
 pair<char,char> find(string auxiliar1, string auxiliar2){
     pair<char, char> dale;
-    /*if(auxiliar2.length() > auxiliar1.length()){
-        dale.first = auxiliar1[auxiliar1.length() - 1];
-        dale.second = auxiliar2[auxiliar2.length() - 1];
-        return dale;
-    }*/
     int limite = min(auxiliar1.length(), auxiliar2.length());
     for(int i = 0; i < limite; i++){
         if(auxiliar1[i] != auxiliar2[i]){
@@ -35,9 +30,7 @@ pair<char,char> find(string auxiliar1, string auxiliar2){
             return dale;
         }
     }
-    dale.first = auxiliar1[auxiliar1.length() - 1];
-    dale.second = auxiliar2[auxiliar2.length() - 1];
-    return dale;
+    return {'*','*'};
 }
 
 int main(){
@@ -54,7 +47,9 @@ int main(){
     }
     for(int i = 0; i <= (int)registro.size() - 2; i++){
         ordem = find(registro[i], registro[i + 1]);
-        //cout << ordem.first << " " << ordem.second << endl;
+        if(ordem.first == '*'){
+            continue;
+        }
         if(dictionary.find(ordem.first) == dictionary.end()){
             dictionary[ordem.first] = chave;
             dic2[chave] = ordem.first;
@@ -67,9 +62,6 @@ int main(){
         }
         adjlist[dictionary[ordem.first]].push_back(dictionary[ordem.second]);
     }
-    /*for(map<char,int>::iterator it = dictionary.begin(); it != dictionary.end(); ++it){
-        cout << it->first << " " << it->second << endl;
-    }*/
     for(int i = 1; i <= chave - 1; i++){
         if(visitados[i] == 0){
             toposort(i);
@@ -78,5 +70,6 @@ int main(){
     for(int a = (int)answer.size() - 1; a >= 0; a--){
         printf("%c", answer[a]);
     }
+    printf("\n");
     return 0;
 }
