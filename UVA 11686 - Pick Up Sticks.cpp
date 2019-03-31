@@ -14,16 +14,20 @@ void preprocess(){
 }
 
 void toposort(int x){
+    if(possible == 0){
+        return;
+    }
     visitados[x] = 1;
     for(int i = 0; i < (int)adjlist[x].size(); i++){
         int u = adjlist[x][i];
         if(visitados[u] == 0){
             toposort(u);
-        }else{
+        }else if(visitados[u] == 1){
             possible = 0;
         }
     }
     answer.push_back(x);
+    visitados[x] = 2;
 }
 
 int main(){
