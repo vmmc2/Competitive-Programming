@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int> adjlist[220];
+int visitados[220];
+int visitadosdfs[220];
+int bipartite;
+
+
+void preprocess(){
+    for(int i = 0; i < 220; i++){
+        adjlist[i].clear();
+        visitados[i] = 2;
+        visitadosdfs[i] = 0;
+    }
+}
+
+void bfs(int x){
+    queue <int> fila;
+    fila.push(x);
+    visitadosdfs[x] = 1;
+    int atual = 0;
+    while(!fila.empty()){
+        int v = fila.front();
+        fila.pop();
+        for(int i = 0; i < (int)adjlist[v].size(); i++){
+            int u = adjlist[v][i];
+            if(visitadosdfs[u] == 0){
+                visitadosdfs[u] += visitadosdfs[v] + 1;
+                fila.push(u);
+            }
+        }
+    }
+}
+
+void bipartite_check(int x){
+    queue <int> fila;
+    fila.push(x);
+    while(!fila.empty() && bipartite){
+        int u = fila.front();
+        fila.pop();
+        for(int i = 0; i < (int)adjlist[u].size(); i++){
+            int now = adjlist[u][i];
+            if(visitados[now] == 2){
+                visitados[now] = 1 - visitados[u];
+                fila.push(now);
+            }
+            else if(visitados[now] == visitados[u]){
+                bipartite = 0;
+                break;
+            }
+        }
+    }
+}
+
+int main(){
+    int pula;
+    int numcasos;
+    int numvertices, numedges;
+    int a, b;
+    scanf("%d", &numcasos);
+    while(numcasos--){
+        pula = 0;
+        bipartite = 1; // assumo que o grafo é bipartido
+        preprocess();
+        scanf("%d %d", &numvertices, &numedges);
+        for(int i = 1; i <= numedges; i++){
+            scanf("%d %d", &a, &b);
+            adjlist[a].push_back(b);
+            adjlist[b].push_back(a);
+        }
+        for(int i = 0; i < numvertices; i++){
+            bipartite_check(i);
+            if(bipartite == 0){
+                printf("-1\n");
+                pula = 1;
+                break;
+            }
+        }
+        if(pula == 1){
+            continue;
+        }else{ //entao o grafo é bipartido. agora a gente tem q ver a qtd de componentes conexos e o tamanho de cada componente rsrs
+            int answer = 0;
+            for(int i = 0; i < numvertices; i++){
+                if(visitadosdfs[i] == 0){
+                    bfs(i);
+                }
+            }
+            printf("%d\n", answer);
+        }
+    }
+    return 0;
+}
