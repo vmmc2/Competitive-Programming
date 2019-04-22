@@ -62,8 +62,13 @@ int main(){
     edge aux;
     int numvertices, newlines, original;
     int a1, a2;
+    int ok = 1;
     while(cin >> numvertices){
         initialize();
+        if(!ok){
+            cout << endl;
+        }
+        ok = 0;
         a1 = 0;
         a2 = 0;
         for(int i = 1 ; i <= numvertices - 1; i++){
@@ -90,7 +95,7 @@ int main(){
         }
         cout << a1 << endl;
         cout << a2 << endl;
-        cout << endl; //printando um fim de linha ao final de cada caso de teste.
+        //printando um fim de linha ao final de cada caso de teste.
         answer1.clear();
         edgelist.clear();
     }
