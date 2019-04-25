@@ -12,7 +12,7 @@ int size[200100];
 
 
 void initialize(){
-    for(int i = 0; i < 2019; i++){
+    for(int i = 0; i < 200100; i++){
         dsu[i] = i;
         size[i] = 1;
     }
