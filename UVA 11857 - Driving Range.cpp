@@ -75,6 +75,7 @@ int main(){
     edge auxiliar;
     int numvertices, numedges;
     while(true){
+        initialize();
         memset(visitados, 0, sizeof visitados);
         numcomponentes = 0;
         scanf("%d %d", &numvertices, &numedges);
@@ -100,14 +101,12 @@ int main(){
             sort(edgelist.begin(), edgelist.end(), compare);
             for(int i = 0; i < (int)edgelist.size(); i++){
                 if(find(edgelist[i].a, edgelist[i].b) == false){
-                    printf("entrei\n");
                     weighted_union(edgelist[i].a, edgelist[i].b);
                     answer.push_back(edgelist[i]);
                 }
             }
-            for(int i = 0; i < (int)answer.size(); i++){
-                printf("%d ", answer[i].weight);
-            }
+            int tammy = (int)answer.size() - 1;
+            printf("%d\n", answer[tammy].weight);
         }
         //resetando as paradas
         edgelist.clear();
