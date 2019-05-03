@@ -79,10 +79,10 @@ int main(){
                     weighted_union(edgelist[j].a, edgelist[j].b);
                     mstcost += edgelist[j].weight;
                 }else if(edgelist[j].weight >= airports){
+                    air++;
                     mstcost += airports;
-                    airports += 2;
+                    weighted_union(edgelist[j].a, edgelist[j].b);
                 }
-         
             }
         }
         for(int j = 1; j <= numvertices; j++){
@@ -91,10 +91,7 @@ int main(){
                 mstcost += airports;
             }
         }
-        printf("Case #%d: %d %d", i, mstcost, air);
-        if(i != numcasos){
-            printf("\n");
-        }
+        printf("Case #%d: %d %d\n", i, mstcost, air);
     }
     return 0;
-}
+}    
