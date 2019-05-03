@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct edge{
+    int a, b;
+    int weight;
+};
+
+int main(){
+    char lixo1, lixo2;
+    edge auxiliar;
+    vector<edge> edgelist;
+    int numcasos;
+    int numvertices;
+    scanf("%d", &numcasos);
+    for(int i = 1; i <= numcasos; i++){
+        scanf("%d", &numvertices);
+    }
+    return 0;
+}
