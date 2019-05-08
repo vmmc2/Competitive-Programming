@@ -77,23 +77,36 @@ int main(){
     int mstcost;
     cin >> numcasos;
     for(int i = 0; i < numcasos; i++){
+        int foi;
+        int misera = 9999999;
         initialize();
         vector<string> registro;
         mstcost = 0;
         vector<edge> edgelist;
-        registro.push_back("0000");
+        //registro.push_back("0000");
         cin >> numvertices;
         for(int j = 1; j <= numvertices; j++){
             cin >> aux;
             registro.push_back(aux);
         }
         map<string, int>dictionary;
-        //fazendo a equivalencia entre string e inteiro para poder rotular os vertices do grafo
-        k = 0;
+        dictionary["0000"] = 0;
+        k = 1;
         for(int j = 0; j < (int)registro.size(); j++){
             dictionary[registro[j]] = k;
             k++;
         }
+        for(int j = 0; j < (int)registro.size(); j++){
+            foi = dist("0000", registro[j]);
+            if(foi < misera){
+                misera = foi;
+                dale1.a = dictionary["0000"];
+                dale1.b = dictionary[registro[j]];
+                dale1.weight = misera;
+            }
+        }
+        edgelist.push_back(dale1);
+        //fazendo a equivalencia entre string e inteiro para poder rotular os vertices do grafo
         //cabou-se. hora de calcular as distancias entre cada par de vertices
         for(int j = 0; j < (int)registro.size() - 1; j++){
             for(int k = j + 1; k < (int)registro.size(); k++){
