@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct point{
+    int x, int y;
+};
+
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    
+    int numvertices;
+    while(cin >> numvertices){
+        point auxiliar;
+        vector<point> pontos;
+        for(int i = 1; i <= numvertices; i++){
+            cin >> auxiliar.x >> auxiliar.y;
+            pontos.push_back(auxiliar);
+        }
+    }
+    return 0;
+}
