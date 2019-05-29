@@ -99,9 +99,7 @@ int main(){
         for(int j = 0; j < (int)edgelist.size(); j++){
             auxiliar = edgelist[j];
             if(find(edgelist[j].a, edgelist[j].b) == false){
-                if(mincost < auxiliar.weight){
-                    mincost = auxiliar.weight;
-                }
+                answer.push_back(auxiliar);
                 weighted_union(edgelist[j].a, edgelist[j].b);
                 curedge++;
                 if(curedge == numvertices - compinicial){
@@ -109,7 +107,8 @@ int main(){
                 }
             }
         }
-        printf("%.2lf\n", mincost);
+        int tam = (int)answer.size();
+        printf("%.2lf\n", answer[tam - 1].weight);
     }
     return 0;
 }
