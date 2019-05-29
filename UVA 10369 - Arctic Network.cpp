@@ -78,8 +78,8 @@ int main(){
         vector<edge> answer;
         point aux;
         edge auxiliar;
+        initialize();
         scanf("%d %d", &compinicial, &numvertices);
-        compinicial = numvertices;
         for(int j = 1; j <= numvertices; j++){
             scanf("%d %d", &aux.x, &aux.y);
             pontos.push_back(aux);
@@ -89,22 +89,26 @@ int main(){
                 auxiliar.a = j;
                 auxiliar.b = k;
                 auxiliar.weight = dist(pontos[j], pontos[k]);
+                edgelist.push_back(auxiliar);
             }
-            edgelist.push_back(auxiliar);
         }
         sort(edgelist.begin(), edgelist.end(), compare);
+        int curedge = 0;
         for(int j = 0; j < (int)edgelist.size(); j++){
-            if(numvertices == numcomponentes){
+            if(curedge == numvertices - compinicial){
                 break;
             }
             if(find(edgelist[j].a, edgelist[j].b) == false){
                 weighted_union(edgelist[j].a, edgelist[j].b);
                 answer.push_back(edgelist[j]);
-                numvertices--;
+                curedge++;
             }
         }
         int tamanho = (int)answer.size();
-        printf("%.2lf\n", answer[tamanho - 1].weight);
+        printf("%.2lf", answer[tamanho - 1]);
+        if(i != numcasos){
+            printf("\n");
+        }
     }
     return 0;
 }
