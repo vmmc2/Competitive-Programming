@@ -3,8 +3,8 @@
 
 using namespace std;
 
-int dsu[600];
-int size[600];
+int dsu[20000];
+int size[20000];
 
 struct edge{
     int a, b;
@@ -23,7 +23,7 @@ double dist(point a, point b){
 }
 
 void initialize(){
-    for(int i = 0; i < 600; i++){
+    for(int i = 0; i < 20000; i++){
         dsu[i] = i;
         size[i] = 1;
     }
@@ -71,11 +71,13 @@ int main(){
     int numcasos;
     int numvertices, numcomponentes;
     int compinicial;
+    double mincost;
     scanf("%d", &numcasos);
     for(int i = 1; i <= numcasos; i++){
         vector<point> pontos;
         vector<edge> edgelist;
         vector<edge> answer;
+        mincost = 0;
         point aux;
         edge auxiliar;
         initialize();
@@ -95,20 +97,19 @@ int main(){
         sort(edgelist.begin(), edgelist.end(), compare);
         int curedge = 0;
         for(int j = 0; j < (int)edgelist.size(); j++){
-            if(curedge == numvertices - compinicial){
-                break;
-            }
+            auxiliar = edgelist[j];
             if(find(edgelist[j].a, edgelist[j].b) == false){
+                if(mincost < auxiliar.weight){
+                    mincost = auxiliar.weight;
+                }
                 weighted_union(edgelist[j].a, edgelist[j].b);
-                answer.push_back(edgelist[j]);
                 curedge++;
+                if(curedge == numvertices - compinicial){
+                    break;
+                }
             }
         }
-        int tamanho = (int)answer.size();
-        printf("%.2lf", answer[tamanho - 1]);
-        if(i != numcasos){
-            printf("\n");
-        }
+        printf("%.2lf\n", mincost);
     }
     return 0;
 }
