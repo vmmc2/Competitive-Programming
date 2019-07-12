@@ -1,0 +1,146 @@
+#include <bits/stdc++.h>
+#define pb push_back
+
+using namespace std;
+
+int dsu[200];
+int size[200];
+int visitados[200];
+vector<int>path;
+vector<pair<int,int>>adjlist[200];
+int flag;
+
+void initialize(){
+    for(int i = 0; i < 200; i++){
+        dsu[i] = i;
+        size[i] = 1;
+    }
+}
+int root(int i){
+    while(dsu[i] != i){
+        dsu[i] = dsu[dsu[i]];
+        i = dsu[i];
+    }
+    return i;
+}
+bool find(int a, int b){
+    if(root(a) == root(b)){
+        return true;
+    }else{
+        return false;
+    }
+}
+void weighted_union(int a, int b){
+    int root_A = root(a);
+    int root_B = root(b);
+    if(root_A == root_B){
+        return;
+    }
+    if(size[root_A] < size[root_B]){
+        dsu[root_A] = dsu[root_B];
+        size[root_B] += size[root_A];
+    }
+    else{
+        dsu[root_B] = dsu[root_A];
+        size[root_A] += size[root_B];
+    }
+}
+
+struct edge{
+    int a, b;
+    int weight;
+};
+
+
+bool compare(edge aresta1, edge aresta2){
+    return aresta1.weight < aresta2.weight;
+}
+
+void dfs(int partida, int chegada){
+    visitados[partida] = 1;
+    for(int i = 0; i < (int)adjlist[partida].size(); i++){
+        int x = adjlist[partida][i].first;
+        int meh = adjlist[partida][i].second;
+        if(visitados[x] == 0){
+            path.pb(meh);
+            
+            if(x == chegada){
+                flag = 1;
+                visitados[x] = 1;
+                return;
+            }
+            
+            dfs(x,chegada);
+            if(flag == 1){
+                break;
+            }
+        }
+    }
+    if(flag == 1){
+        return;
+    }
+    path.pop_back();
+}
+
+int main(){
+    int numvertices, numedges, numqueries;
+    int partida, chegada;
+    int caso = 1;
+    int maximo;
+    int ok = 0;
+    while(true){
+        initialize();
+        vector<edge> edgelist;
+        vector<edge>mst;
+        for(int i = 0; i < 200; i++){
+            adjlist[i].clear();
+        }
+        edge auxiliar;
+        scanf("%d %d %d", &numvertices, &numedges, &numqueries);
+        if(numvertices == 0 && numedges == 0 && numqueries == 0){
+            break;
+        }
+        if(ok == 1){
+            printf("\n");
+        }
+        for(int i = 0; i < numedges; i++){
+            scanf("%d %d %d", &auxiliar.a, &auxiliar.b, &auxiliar.weight);
+            edgelist.pb(auxiliar);
+        }
+        sort(edgelist.begin(), edgelist.end(), compare);
+        //buildando a mst
+        for(int i = 0; i < (int)edgelist.size(); i++){
+            if(find(edgelist[i].a, edgelist[i].b) == false){
+                weighted_union(edgelist[i].a, edgelist[i].b);
+                mst.pb(edgelist[i]);
+            }
+        }
+        //agora chegou a hora de buildar a porra do grafo (adjlist);
+        for(int i = 0; i < (int)mst.size(); i++){
+            adjlist[edgelist[i].a].pb({edgelist[i].b, edgelist[i].weight});
+            adjlist[edgelist[i].b].pb({edgelist[i].a, edgelist[i].weight});
+        }
+        //topzera chegou a hora de processar as numqueries
+        printf("Case #%d\n", caso);
+        for(int i = 1; i <= numqueries; i++){
+            path.clear();
+            memset(visitados, 0, sizeof visitados);
+            maximo = -9999999;
+            scanf("%d %d", &partida, &chegada);
+            int dele = chegada;
+            flag = 0;
+            dfs(partida, chegada);
+            if(visitados[dele] == 0){
+                printf("no path\n");
+            }else{
+                for(int j = 0; j < (int)path.size(); j++){
+                    maximo = max(maximo, path[j]);
+                }
+                printf("%d\n", maximo);
+            }
+        }
+    caso++;
+    ok = 1;
+    }
+    return 0;
+}
