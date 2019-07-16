@@ -1,0 +1,65 @@
+class union_find:
+    def __init__(self, tam):
+        self.dsu = [n for n in range(0,tam + 1)]
+        self.size = [1 for n in range(0, tam + 1)]
+        
+    def root(self, i):
+        while self.dsu[i] != i:
+            self.dsu[i] = self.dsu[self.dsu[i]]
+            i = self.dsu[i]
+        return i 
+    
+    def find(self, a, b):
+        rootA = self.root(a)
+        rootB = self.root(b)
+        if rootA == rootB:
+            return True
+        else:
+            return False
+    
+    def union(self, a, b):
+        A = self.root(a)
+        B = self.root(b)
+        if A == B:
+            return
+        if self.size[A] < self.size[B]:
+            self.dsu[A] = self.dsu[B]
+            self.size[B] += self.size[A]
+        else:
+            self.dsu[B] = self.dsu[A]
+            self.size[A] += self.size[B]
+            
+    def numelements(self, a):
+        A = self.root(a)
+        return self.size[A]
+
+
+numvertices, numedges = input().split()
+numvertices = int(numvertices)
+numedges = int(numedges)
+uf = union_find(numvertices)
+dicionario = [0 for n in range(0, numvertices + 1)]
+
+cycles = 0
+for element in range(0, numedges):
+    vertice1, vertice2 = map(int, input().split())
+    if uf.find(vertice1, vertice2) == False:
+        if dicionario[uf.root(vertice1)] == 1:
+            #print("era um ciclo mas eu uni dois vertices de ciclos diferentes ", vertice1, " ", vertice2)
+            cycles -= 1
+            dicionario[uf.root(vertice1)] = 4
+        uf.union(vertice1, vertice2)
+        continue
+    elif uf.find(vertice1, vertice2) == True:
+        if dicionario[uf.root(vertice1)] == 0:
+            uf.union(vertice1, vertice2)
+            #print("montei o seguinte ciclo: ", vertice1, " ", vertice2)
+            dicionario[uf.root(vertice1)] = 1
+            cycles += 1
+            continue
+        elif dicionario[uf.root(vertice1)] == 1:
+            #print("era um ciclo mas eu uni dois vertices dentro do ciclo ", vertice1, " ", vertice2)
+            uf.union(vertice1, vertice2)
+            cycles -= 1
+            
+print(cycles)
