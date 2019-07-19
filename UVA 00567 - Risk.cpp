@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #include <cmath>
-#define INF 9999999
+#define INF 999999
 
 using namespace std;
 
