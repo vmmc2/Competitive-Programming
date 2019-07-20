@@ -27,15 +27,15 @@ int main(){
                     adjmatrixy[i][i] = 0;
                     auxmat[i][i] = '*';
                 }else{
-                    adjmatrixv[i][j] = 1000000;
-                    adjmatrixy[i][j] = 1000000;
+                    adjmatrixv[i][j] = 100000000;
+                    adjmatrixy[i][j] = 100000000;
                     auxmat[i][j] = '*';
                 }
             }
         }
         map<char,int> dicio;
         map<int,char> dicio2;
-        int minimo = 1000000;
+        int minimo = 100000000;
         for(int i = 1; i <= numedges; i++){
             cin >> age >> side >> x >> y >> peso;
             //primeiro, temos que fazer a conversao de letras para inteiros
@@ -77,69 +77,117 @@ int main(){
                 }
             }
         }
-        scanf("%c %c", &me, &miguel);
-        aux--;
-        //hora de rodar o floyd_warshall... para o rapaz mais novo....
-        for(int k = 1; k <= aux; k++){
-            for(int i = 1; i <= aux; i++){
-                for(int j = 1; j <= aux; j++){
-                    if(auxmat[i][j] == 'Y' && auxmat[i][k] == 'Y' && auxmat[k][j] == 'Y'){
-                        adjmatrixy[i][j] = min(adjmatrixy[i][j], adjmatrixy[i][k] + adjmatrixy[k][j]);
-                    }
-                }
-            }
+        /*for(map<char,int>::iterator it = dicio.begin(); it != dicio.end(); ++it){
+            printf("%c %d\n", it->first, it->second);
         }
-        printf("matriz do cara novo:\n");
+        printf("\n\n\n");*/
+        cin >> me >> miguel;
+        aux--;
+        /*printf("matriz do cara novo:\n");
         for(int i = 1; i <= aux; i++){
             for(int j = 1; j <= aux; j++){
                 printf("%d ", adjmatrixy[i][j]);
             }
             printf("\n");
         }
-        printf("\n");
-        //hora de rodar o fw para o velho
+        printf("\n");*/
+        //hora de rodar o floyd_warshall... para o rapaz mais novo....
         for(int k = 1; k <= aux; k++){
             for(int i = 1; i <= aux; i++){
                 for(int j = 1; j <= aux; j++){
-                    if(auxmat[i][j] == 'M' && auxmat[i][k] == 'M' && auxmat[k][j] == 'M'){
-                        adjmatrixv[i][j] = min(adjmatrixv[i][j], adjmatrixv[i][k] + adjmatrixv[k][j]);
+                    if(auxmat[i][k] == 'Y' && auxmat[k][j] == 'Y'){
+                        adjmatrixy[i][j] = min(adjmatrixy[i][j], adjmatrixy[i][k] + adjmatrixy[k][j]);
                     }
                 }
             }
         }
-        printf("matriz do cara velho:\n");
+        /*printf("matriz do cara novo:\n");
+        for(int i = 1; i <= aux; i++){
+            for(int j = 1; j <= aux; j++){
+                printf("%d ", adjmatrixy[i][j]);
+            }
+            printf("\n");
+        }
+        printf("\n");*/
+        
+        //
+        
+        /*printf("matriz do cara velho:\n");
         for(int i = 1; i <= aux; i++){
             for(int j = 1; j <= aux; j++){
                 printf("%d ", adjmatrixv[i][j]);
             }
             printf("\n");
         }
-        printf("\n");
+        printf("\n");*/
+        //hora de rodar o fw para o velho
+        for(int k = 1; k <= aux; k++){
+            for(int i = 1; i <= aux; i++){
+                for(int j = 1; j <= aux; j++){
+                    if(auxmat[i][k] == 'M' && auxmat[k][j] == 'M'){
+                        adjmatrixv[i][j] = min(adjmatrixv[i][j], adjmatrixv[i][k] + adjmatrixv[k][j]);
+                    }
+                }
+            }
+        }
+        /*printf("matriz do cara velho:\n");
+        for(int i = 1; i <= aux; i++){
+            for(int j = 1; j <= aux; j++){
+                printf("%d ", adjmatrixv[i][j]);
+            }
+            printf("\n");
+        }
+        printf("\n");*/
+        //printf("DALE: %d %d\n", dicio[me], dicio[miguel]);
+        if(me == miguel){
+            minimo = 0;
+            answer.push_back(me);
+            for(int i = 1; i <= aux; i++){
+                if(dicio2[i] == me || dicio2[i] == miguel){
+                    continue;
+                }
+                if(adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i] < minimo){
+                    minimo = adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i];
+                    answer.pb(dicio2[i]);
+                }else if(adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i] < 100000000 && adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i] == minimo){
+                    answer.pb(dicio2[i]);
+                }
+            }
+            sort(answer.begin(), answer.end());
+            printf("%d ", minimo);
+            for(int i = 0; i < (int)answer.size() - 1; i++){
+                printf("%c ", answer[i]);
+            }
+            int dale = (int)answer.size();
+            printf("%c\n", answer[dale - 1]);
+            continue;
+        }
         for(int i = 1; i <= aux; i++){
             if(adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i] < minimo){
                 minimo = adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i];
                 answer.pb(dicio2[i]);
-            }else if(adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i] < 0xffffff && adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i] == minimo){
+            }else if(adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i] < 100000000 && adjmatrixy[dicio[me]][i] + adjmatrixv[dicio[miguel]][i] == minimo){
                 answer.pb(dicio2[i]);
             }
         }
         sort(answer.begin(), answer.end());
-        if(minimo == 1000000){
+        if(minimo == 100000000){
             printf("You will never meet.\n");
             continue;
         }
         if((int)answer.size() == 1){
-            if(minimo == 0xffffff){
+            if(minimo == 100000000){
                 printf("You will never meet.\n");
             }else{
                 printf("%d %c\n", minimo, answer[0]);
             }
         }else{
             printf("%d ", minimo);
-            for(int i = 0; i < (int)answer.size(); i++){
+            for(int i = 0; i < (int)answer.size() - 1; i++){
                 printf("%c ", answer[i]);
             }
-            printf("\n");
+            int dale = (int)answer.size();
+            printf("%c\n", answer[dale - 1]);
         }
     }
     return 0;
