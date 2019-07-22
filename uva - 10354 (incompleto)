@@ -1,0 +1,132 @@
+#include <bits/stdc++.h>
+#include <cmath>
+#define pb push_back
+
+using namespace std;
+
+vector<pair<int,int>> adjlist[110];
+vector<pair<int,int>> newadjlist[110];
+int graph[110][110];
+long long distboss[110];
+int p[110];
+long long distme[110];
+vector<int> pathtrue;
+
+void preprocess(){
+    for(int i = 0; i < 110; i++){
+        adjlist[i].clear();
+        newadjlist[i].clear();
+    }
+    for(int i = 0; i < 110; i++){
+        for(int j = 0; j < 110; j++){
+            graph[i][j] = 0;
+        }
+    }
+}
+
+void dijkstra(int s){
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    distboss[s] = 0;
+    pq.push({0,s});
+    while(!pq.empty()){
+        pair<int,int> front = pq.top();
+        pq.pop();
+        int d = front.first;
+        int u = front.second;
+        if(d > distboss[u]){
+            continue;
+        }
+        for(int i = 0; i < (int)adjlist[u].size(); i++){
+            pair <int,int> v = adjlist[u][i];
+            if(distboss[u] + v.second < distboss[v.first]){
+                distboss[v.first] = distboss[u] + v.second;
+                pq.push({distboss[v.first],v.first});
+                p[v.first] = u;
+            }
+        }
+    }
+}
+
+void newdijkstra(int s){
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    distme[s] = 0;
+    pq.push({0,s});
+    while(!pq.empty()){
+        pair<int,int> front = pq.top();
+        pq.pop();
+        int d = front.first;
+        int u = front.second;
+        if(d > distme[u]){
+            continue;
+        }
+        for(int i = 0; i < (int)newadjlist[u].size(); i++){
+            pair <int,int> v = newadjlist[u][i];
+            if(distme[u] + v.second < distme[v.first]){
+                distme[v.first] = distme[u] + v.second;
+                pq.push({distme[v.first],v.first});
+            }
+        }
+    }
+}
+
+void restore_path(int s, int t){
+    for(int v = t; v != s; v = p[v]){
+        pathtrue.push_back(v);
+    }
+    pathtrue.push_back(s);
+    reverse(pathtrue.begin(), pathtrue.end());
+}
+
+
+int main(){
+    int numvertices, numedges;
+    int partidame, chegadame;
+    int partidaboss, chegadaboss;
+    int a, b, weight;
+    while(scanf("%d %d %d %d %d %d", &numvertices, &numedges, &partidaboss, &chegadaboss, &partidame, &chegadame) == 6){
+        preprocess();
+        for(int i = 0; i < 110; i++){
+	    distme[i] = 1000000000;
+	    distboss[i] = 1000000000;
+	}
+        memset(p, -1, sizeof p);
+        for(int i = 1; i <= numedges; i++){
+            scanf("%d %d %d", &a, &b, &weight);
+            graph[a][b] = graph[b][a] = weight;
+            adjlist[a].pb({b,weight});
+            adjlist[b].pb({a,weight});
+        }
+        //dijkstra a partir do boss, pra dps retirar
+        dijkstra(partidaboss);
+        //agora tem que recuperar o caminho feito pelo boss e retirar as arestas que foram usadas pelo boss do grafo
+        restore_path(partidaboss, chegadaboss);
+        //agr tem que retirar as arestas que foram usadas pelo chefe...
+        for(int i = 0; i < (int)pathtrue.size() - 1; i++){
+            graph[pathtrue[i]][pathtrue[i + 1]] = 0;
+            graph[pathtrue[i + 1]][pathtrue[i]] = 0;
+        }
+        //montando o grafo novo....
+        for(int i = 1; i <= numvertices; i++){
+            for(int j = 1; j <= numvertices; j++){
+                if(graph[i][j] > 0){
+                    newadjlist[i].push_back({j, graph[i][j]});
+                }
+            }
+        }
+        /*printf("\n");
+        for(int i = 1; i <= numvertices; i++){
+            printf("%d: ", i);
+            for(int j = 0; j < (int)newadjlist[i].size(); j++){
+                printf("<%d %d> ", newadjlist[i][j].first, newadjlist[i][j].second);
+            }
+            printf("\n");
+        }*/
+        newdijkstra(partidame);
+        if(distme[chegadame] == 1000000000 || (partidame == chegadame && chegadaboss == chegadame)){
+            printf("MISSION IMPOSSIBLE.\n");
+        }else{
+            printf("%lld\n", distme[chegadame]);
+        }
+    }
+    return 0;
+}
