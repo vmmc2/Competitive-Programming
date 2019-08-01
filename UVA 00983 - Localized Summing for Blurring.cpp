@@ -50,7 +50,20 @@ int main(){
         for(i = 0; i < (int)answer.size(); i++){
             sum += answer[i];
         }
-        
+        int ord = n - m + 1;
+        int sentinela = 0;
+        int newmatrix[ord][ord];
+        for(i = 0; i < ord; i++){
+            for(j = 0; j < ord; j++){
+                newmatrix[i][j] = answer[sentinela];
+                sentinela++;
+            }
+        }
+        for(i = ord - 1; i >= 0; i--){
+            for(j = 0; j < ord; j++){
+                printf("%d\n", newmatrix[i][j]);
+            }
+        }
         printf("%d\n", sum);
     }
     return 0;
