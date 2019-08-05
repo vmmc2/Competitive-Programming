@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+#include <cmath>
+#define pb push_back
+
+using namespace std;
+
+bool compare(tuple<int,int,int> a, tuple<int,int,int> b){
+    int x1 = get<0>(a);
+    int y1 = get<1>(a);
+    int z1 = get<2>(a);
+    int x2 = get<0>(b);
+    int y2 = get<1>(b);
+    int z2 = get<2>(b);
+    if(x1 < x2 && y1 < y2){
+        return true;
+    }
+    return false;
+}
+
+
+
+int main(){
+    int numblocks;
+    int x, y, z;
+    tuple<int,int,int> aux;
+    int caso = 1;
+    int flag = 0;
+    while(scanf("%d", &numblocks) == 1 &&  numblocks != 0){
+        vector<tuple<int,int,int>> blocos;
+        for(int i = 1; i <= numblocks; i++){
+            scanf("%d %d %d", &x, &y, &z);
+            blocos.pb(tuple<int,int,int>(x, y, z));
+            blocos.pb(tuple<int,int,int>(y, x, z));
+            blocos.pb(tuple<int,int,int>(x, z, y));
+            blocos.pb(tuple<int,int,int>(z, x, y));
+            blocos.pb(tuple<int,int,int>(y, z, x));
+            blocos.pb(tuple<int,int,int>(z, y, x));
+        }
+        sort(blocos.begin(), blocos.end(), compare);
+        int lis[6*numblocks];
+        for(int i = 0; i <(int)blocos.size(); i++){
+            lis[i] = 0;
+        }
+        for(int i = 0; i < (int)blocos.size(); i++){
+            aux = blocos[i];
+            int x1 = get<0>(aux);
+            int y1 = get<1>(aux);
+            int z1 = get<2>(aux);
+            //printf("x: %d --- y: %d --- z: %d\n", x1, y1, z1);
+        }
+        lis[0] = get<2>(blocos[0]);
+        for(int i = 1; i < 6*numblocks; i++){
+            for(int j = 0; j <= i - 1; j++){
+                int x1 = get<0>(blocos[i]);
+                int y1 = get<1>(blocos[i]);
+                int z1 = get<2>(blocos[i]);
+                int x2 = get<0>(blocos[j]);
+                int y2 = get<1>(blocos[j]);
+                if(x1 > x2 && y1 > y2){
+                    lis[i] = max(lis[i], lis[j] + z1);
+                }
+            }
+        }
+        int answer = -69;
+        for(int i = 0; i < 6*numblocks; i++){
+            answer = max(answer, lis[i]);
+        }
+        printf("Case #%d: maximum height = %d\n", caso, answer);
+        caso++;
+    }
+    return 0;
+}
