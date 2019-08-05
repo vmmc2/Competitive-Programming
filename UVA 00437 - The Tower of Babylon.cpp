@@ -11,13 +11,11 @@ bool compare(tuple<int,int,int> a, tuple<int,int,int> b){
     int x2 = get<0>(b);
     int y2 = get<1>(b);
     int z2 = get<2>(b);
-    if(x1 < x2 && y1 < y2){
-        return true;
-    }
-    return false;
+    if(x1 < x2) return true;
+    if(x1 == x2 && y1 < y2) return true;
+    if(x1 == x2 && y1 == y2 && z1 < z2) return true;
+    else return false;
 }
-
-
 
 int main(){
     int numblocks;
@@ -39,33 +37,26 @@ int main(){
         sort(blocos.begin(), blocos.end(), compare);
         int lis[6*numblocks];
         for(int i = 0; i <(int)blocos.size(); i++){
-            lis[i] = 0;
-        }
-        for(int i = 0; i < (int)blocos.size(); i++){
-            aux = blocos[i];
-            int x1 = get<0>(aux);
-            int y1 = get<1>(aux);
-            int z1 = get<2>(aux);
-            //printf("x: %d --- y: %d --- z: %d\n", x1, y1, z1);
+            lis[i] = 1;
         }
         lis[0] = get<2>(blocos[0]);
         for(int i = 1; i < 6*numblocks; i++){
+            lis[i] = get<2>(blocos[i]);
             for(int j = 0; j <= i - 1; j++){
                 int x1 = get<0>(blocos[i]);
                 int y1 = get<1>(blocos[i]);
-                int z1 = get<2>(blocos[i]);
                 int x2 = get<0>(blocos[j]);
                 int y2 = get<1>(blocos[j]);
-                if(x1 > x2 && y1 > y2){
-                    lis[i] = max(lis[i], lis[j] + z1);
+                if((x1 > x2 && y1 > y2) && lis[j] + get<2>(blocos[i]) > lis[i]){
+                    lis[i] = lis[j] + get<2>(blocos[i]);
                 }
             }
         }
-        int answer = -69;
+        int answer = 0;
         for(int i = 0; i < 6*numblocks; i++){
             answer = max(answer, lis[i]);
         }
-        printf("Case #%d: maximum height = %d\n", caso, answer);
+        printf("Case %d: maximum height = %d\n", caso, answer);
         caso++;
     }
     return 0;
