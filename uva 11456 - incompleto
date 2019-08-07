@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+#include <cmath>
+#define pb push_back
+
+using namespace std;
+
+int main(){
+    int numcasos;
+    scanf("%d", &numcasos);
+    for(int a = 1; a <= numcasos; a++){
+        vector<int> cars;
+        int numcarros;
+        int aux;
+        scanf("%d", &numcasos);
+        for(int i = 0; i < numcarros; i++){
+            scanf("%d", &aux);
+            cars.pb(aux);
+        }
+        int n = numcarros;
+        int lis[n];
+        int lds[n];
+        for(int i = 0; i < n; i++){
+            lis[i] = 1;
+            lds[i] = 1;
+        }
+        //fazendo o lis primeiro
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j <= i - 1; j++){
+                if(cars[i] > cars[j]){
+                    lis[i] = max(lis[i], lis[j] + 1);
+                }
+            }
+        }
+        //fazendo o lds agr 
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j <= i - 1; j++){
+                if(cars[i] < cars[j]){
+                    lds[i] = max(lds[i], lds[j] + 1);
+                }
+            }
+        }
+        //cabou-se
+        int answer = -69;
+        for(int i = 0; i < n; i++){
+            answer = max(answer, lis[i] + lds[i] - 1);
+        }
+        printf("%d\n", answer);
+    }
+    return 0;
+}
