@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+#include <sstream>
+#include <cstdio>
+#include <cmath>
+#define pb push_back
+#define INF 999999
+#define pii pair<int,int>
+
+using namespace std;
+
+struct coin{
+    int val1, val2;
+};
+
+typedef long long ll;
+
+int main(){
+    int numcasos;
+    scanf("%d", &numcasos);
+    for(int a = 1; a <= numcasos; a++){
+        coin aux;
+        int qtdmoedas, target;
+        vector<coins> moedas;
+        scanf("%d %d", &qtdmoedas, &target);
+        for(int b = 1; b <= qtdmoedas; b++){
+            scanf("%d %d", &aux.val1, &aux.val2);
+            moedas.pb(aux);
+        }
+        int novo_target = target * target;
+        int dp[novo_target + 1];
+        //pre-processing...
+        dp[0] = 0;
+        for(int i = 1; i <= novo_target; i++){
+            dp[i] = INF;
+        }
+        //show-time!
+        for(int i = 1; i <= novo_target; i++){
+            for(int j = 0; j < (int)moedas.size(); j++){
+                
+            }
+        }
+    }
+    return 0;
+}
