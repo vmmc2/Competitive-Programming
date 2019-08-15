@@ -18,26 +18,25 @@ int main(){
         int target;
         scanf("%d", &target);
         int numcoins;
-        ll sum = 0;
         scanf("%d", &numcoins);
         vector<ll> coins(numcoins);
         for(int i = 0; i < numcoins; i++){
             scanf("%lld", &coins[i]);
-            sum += coins[i];
         }
-        ll dp[sum + 1];
+        ll dp[21234];
         dp[0] = 0;
-        for(int i = 1; i < sum + 1; i++){
+        for(int i = 1; i < 21234; i++){
             dp[i] = INF;
         }
-        for(int i = 1; i <= sum; i++){
-            for(int j = 0; j < (int)coins.size(); j++){
-                if(coins[j] <= i){
-                    dp[i] = min(dp[i], dp[i - coins[j]] + 1);
-                }
-            }
+        
+        for(int j = 0; j < (int)coins.size(); j++){
+          for(int i = 21233-coins[j]; i >= 0; i--){
+              if(dp[i] != INF){
+                  dp[i+coins[j]] = min(dp[i+coins[j]], dp[i] + 1);
+              }
+          }
         }
-        for(int i = target; i <= sum; i++){
+        for(int i = target; i <= 21234; i++){
             if(dp[i] < INF){
                 value = i;
                 qtd = dp[i];
