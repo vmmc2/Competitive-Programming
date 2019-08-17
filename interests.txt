@@ -1,4 +1,0 @@
--- possiveis areas --
- 1-- saude (detecção de cancer de pele por exemplo)
- 2-- analise de imagens / visao computacional
- 3-- robotica (talvez???)
