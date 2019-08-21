@@ -46,4 +46,4 @@ int main(){
 	}
 	printf("%d\n", best);
 	return 0;
-}327
+}
