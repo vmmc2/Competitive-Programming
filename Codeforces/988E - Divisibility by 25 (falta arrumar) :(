@@ -1,0 +1,158 @@
+#include <bits/stdc++.h>
+#include <sstream>
+#include <cmath>
+#define INF 9999999
+#define pb push_back
+
+using namespace std;
+
+typedef long long ll;
+
+int main(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+
+
+	string numero;
+	string numero1;
+	cin >> numero;
+	numero1 = numero;
+	int vetor[] = {0,0,0,0,0,0,0,0};
+	int swaps00 = 1e8;
+	int swaps25 = 1e8;
+	int swaps50 = 1e8;
+	int swaps75 = 1e8;
+	int tam = (int)numero.length();
+	vector<int>indexes;
+	int deuruim00 = 0, deuruim25 = 0, deuruim50 = 0, deuruim75 = 0;
+
+	for(int i = 0; i < (int)numero.length(); i++){
+		if(numero[i] == '0') vetor[0]++;
+		if(numero[i] == '2') vetor[2]++;
+		if(numero[i] == '5') vetor[5]++;
+		if(numero[i] == '7') vetor[7]++;
+	}
+	if((vetor[0] < 2) && (vetor[2] < 1 || vetor[5] < 1) && (vetor[0] < 1 || vetor[5] < 1) && (vetor[7] < 1 || vetor[5] < 1)){
+		printf("-1\n");
+		return 0;
+	}
+	if(vetor[0] >= 2){ // da pra fazer um numero com final 00, que eh divisivel por 25...
+		swaps00 = 0;
+		for(int i = tam - 1; i >= 0; i--){
+			if(numero[i] == '0'){
+				indexes.pb(i);
+			}
+		}
+		swaps00 += abs((tam - 1) - (indexes[0]));
+		swaps00 += abs((tam - 2) - (indexes[1]));
+		//busca pelo segundo 0
+	}
+	if(vetor[2] >= 1 && vetor[5] >= 1){//da pra fazer um numero com final 25, que eh divisivel por 25...
+		swaps25 = 0;
+		int ind2, ind5;
+		for(int i = tam - 1; i >= 0; i--){
+			//buscando pelo 2
+			if(numero1[i] == '5'){
+				char aux = numero1[tam - 1];
+				numero1[tam - 1] = numero1[i];
+				numero1[i] = aux;
+				ind2 = i;
+				if(numero1[0] == '0'){
+					deuruim25 = 1;
+				}
+				break;
+			}
+		}
+		for(int i = tam - 2; i >= 0; i--){
+			//buscando pelo 5
+			if(numero1[i] == '2'){
+				char aux = numero1[tam - 1];
+				numero1[tam - 1] = numero1[i];
+				numero1[i] = aux;
+				ind5 = i;
+				if(numero1[0] == '0'){
+					deuruim25 = 1;
+				}
+				break;
+			}
+		}
+		swaps25 += abs((tam - 1) - (ind5));
+		swaps25 += abs((tam - 2) - (ind2));
+		if(deuruim25 == 1) swaps25 = 1e8;
+	}
+	numero1 = numero;
+	if(vetor[0] >= 1 && vetor[5] >= 1){//da pra fazer um numero com final 50, que eh divisivel por 25...
+		swaps50 = 0;
+		int ind0, ind5;
+		for(int i = tam - 1; i >= 0; i--){
+			//buscando pelo 0
+			if(numero1[i] == '0'){
+				char aux = numero1[tam - 1];
+				numero1[tam - 1] = numero1[i];
+				numero1[i] = aux;
+				ind0 = i;
+				if(numero1[0] == '0'){
+					deuruim50 = 1;
+				}
+				break;
+			}
+		}
+		for(int i = tam - 2; i >= 0; i--){
+			//buscando pelo 5
+			if(numero1[i] == '5'){
+				char aux = numero1[tam - 1];
+				numero1[tam - 1] = numero1[i];
+				numero1[i] = aux;
+				ind5 = i;
+				if(numero1[0] == '0'){
+					deuruim50 = 1;
+				}
+				break;
+			}
+		}
+		swaps50 += abs((tam - 1) - (ind0));
+		swaps50 += abs((tam - 2) - (ind5));
+		if(deuruim50 == 1){
+			swaps50 = 1e8;
+		}
+	}
+	numero1 = numero;
+	if(vetor[5] >= 1 && vetor[7] >= 1){//da pra fazer um numero com final 75, que eh divisivel por 25...
+		swaps75 = 0;
+		int ind5, ind7;
+		for(int i = tam - 1; i >= 0; i--){
+			if(numero1[i] == '5'){
+				char aux = numero1[tam - 1];
+				numero1[tam - 1] = numero1[i];
+				numero1[i] = aux;
+				ind5 = i;
+				if(numero1[0] == '0'){
+					deuruim75 = 1;
+				}
+				break;
+			}
+		}
+		for(int i = tam - 2; i >= 0; i--){
+			if(numero1[i] == '7'){
+				char aux = numero1[tam - 1];
+				numero1[tam - 1] = numero1[i];
+				numero1[i] = aux;
+				ind7 = i;
+				if(numero1[0] == '0'){
+					deuruim75 = 1;
+				}
+				break;
+			}
+		}
+		swaps75 += abs((tam - 1) - (ind5));
+		swaps75 += abs((tam - 2) - (ind7));
+		if(deuruim75 == 1){
+			swaps75 = 1e8;
+		}
+	}
+	int answer;
+	printf("swaps00: %d ---- swaps25: %d ---- swaps50: %d ----- swaps75: %d\n", swaps00, swaps25, swaps50, swaps75);
+	answer = min(swaps00, min(swaps25, min(swaps50, swaps75)));
+	printf("%d\n", answer);
+	return 0;
+}
