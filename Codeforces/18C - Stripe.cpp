@@ -24,10 +24,12 @@ int main(){
         if(i == 0) sum[i] = v[i];
         else sum[i] += (sum[i - 1] + v[i]);
     }
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < n - 1; i++){
         int sum1 = sum[i];
         int sum2 = total - sum[i];
-        if(sum1 == sum2) ans++;
+        if(sum1 == sum2){
+            ans++; 
+        }
     }
     cout << ans << "\n";
     return 0;
