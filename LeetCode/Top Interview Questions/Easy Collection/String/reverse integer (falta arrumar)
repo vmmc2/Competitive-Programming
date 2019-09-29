@@ -1,0 +1,55 @@
+#include <cmath>
+class Solution {
+public:
+    int reverse(int x) {
+        int negativo = 0;
+        if(x == 0){
+            return 0;
+        }else if(x < 0){
+            x = x*(-1);
+            string s = "";
+            while(x/10 != 0){
+                int r = x % 10;
+                char ss = (char)(r + 48);
+                s += ss;
+                x = x/10;
+            }
+            s += '-';
+            reverse(s.begin(), s.end());
+            if(s == "-2147483648"){
+                return 0;
+            }else{
+                int answer = 0;
+                int tam = (int)s.size();
+                int exp = 0;
+                for(int i = tam - 1; i >= 1; i--){
+                    answer += ((int)(s[i] - 48)*pow(10, exp));
+                    exp++;
+                }
+                answer = answer*(-1);
+                return answer;
+            }
+        }else if(x > 0){
+           string s = "";
+            while(x/10 != 0){
+                int r = x % 10;
+                char ss = (char)(r + 48);
+                s += ss;
+                x = x/10;
+            }
+            reverse(s.begin(), s.end());
+            if(s == "2147483647"){
+                return 0;
+            }else{
+                int answer = 0;
+                int tam = (int)s.size();
+                int exp = 0;
+                for(int i = tam - 1; i >= 1; i--){
+                    answer += ((int)(s[i] - 48)*pow(10, exp));
+                    exp++;
+                }
+                return answer;
+            }
+        }
+    }
+};
