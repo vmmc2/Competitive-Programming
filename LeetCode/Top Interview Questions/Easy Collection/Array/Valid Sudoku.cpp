@@ -41,18 +41,19 @@ public:
                 memset(vetor, 0, sizeof vetor);
                 for(int k = i, a = 0; a <= 2; a++, k++){
                     for(int l = j, b = 0; b <= 2; b++, l++){
-                        int x = (int)board[i][j] - 48;
-                        vetor[x]++;
-                        if(vetor[x] >= 2){
-                            printf("entrei3");
-                            valid = false;
-                            goto dale;
+                        if(board[k][l] != '.'){
+                            int x = (int)board[k][l] - 48;
+                            vetor[x]++;
+                            if(vetor[x] >= 2){
+                                valid = false;
+                                goto dale;
+                            }
                         }
                     }
                 }
             }
         }
-        
+        return valid;
         dale:
             return valid;
     }
