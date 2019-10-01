@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+#include <sstream>
+#include <cmath>
+#define pb push_back
+#define INF 99999999
+
+using namespace std;
+
+typedef long long ll;
+typedef unsigned long long ull;
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    
+    string guests;
+    int n, k;
+    cin >> n >> k;
+    cin >> guests;
+    map<char,int> hstable;
+    set<char> jafoi;
+    for(int i = 0; i < (int)guests.size(); i++){
+        hstable[guests[i]]++;
+    }
+    for(int i = 0; i < (int)guests.size(); i++){
+        if(jafoi.find(guests[i]) == jafoi.end()){
+            jafoi.insert(guests[i]);
+            hstable[guests[i]]--;
+            if(hstable[guests[i]] == 0){
+                k++;
+            }else{
+                k--;
+                if(k < 0){
+                    printf("YES\n");
+                    return 0;
+                }
+            }
+        }else if(jafoi.find(guests[i]) != jafoi.end()){
+            hstable[guests[i]]--;
+            if(hstable[guests[i]] == 0){
+                k++;
+            }
+        }
+    }
+    printf("NO\n");
+    return 0;
+}
