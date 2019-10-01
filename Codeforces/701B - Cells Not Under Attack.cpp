@@ -36,24 +36,21 @@ int main(){
 		}else{
 			col.insert(y);
 		}
-		
 		if(flagjafoix == 0 && flagjafoiy == 0){
-		    //cout << "opa" << "\n";
 		    if(i == 1){
 		        ocupadas = (2*n - 1);
 		    }else{
 			    ocupadas = (2*n - 1) - ((int)lin.size()-1) - ((int)col.size() - 1);
 		    }
 		}else if(flagjafoix == 1 && flagjafoiy == 0){
-		    //cout << "opa2" << "\n";
 			ocupadas = (2*n - 1) - n - ((int)lin.size() - 1);
 		}else if(flagjafoix == 0 && flagjafoiy == 1){
-		    //cout << "opa3" << "\n";
 			ocupadas = (2*n - 1) - n - ((int)col.size() - 1);
+		}else if(flagjafoix == 1 && flagjafoiy == 1){
+		    ocupadas = 0; //nesse caso, temos que estamos inserindo a peça exatamente na intersecção das linhas formadas por duas peças.
 		}
 	    total += ocupadas;
-	    //printf("ocupadas: %lld\n", ocupadas);
-	    //printf("lin.size(): %d ---- col.size(): %d\n", (int)lin.size(), (int)col.size());
+	    
 	    ncells -= total;
 		cout << ncells << " ";
 	}
