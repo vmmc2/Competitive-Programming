@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+#include <sstream>
+#include <cmath>
+#define pb push_back
+#define INF 99999999
+
+using namespace std;
+
+typedef long long ll;
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    
+    string frase;
+    cin >> frase;
+    int numqueries;
+    cin >> numqueries;
+    int type, int l, int r;
+    int pos, char c;
+    for(int a = 1; a <= numqueries; a++){
+        cin >> type;
+        if(type == 1){
+            cin >> pos >> c;
+            pos--;
+            frase[pos] = c;
+        }else if(type == 2){
+            cin >> l >> r;
+        }
+    }
+    return 0;
+}
