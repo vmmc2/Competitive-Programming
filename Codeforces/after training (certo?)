@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+#include <cmath>
+#include <sstream>
+#define pb push_back
+#define INF 99999999
+
+using namespace std;
+
+typedef long long ll;
+typedef unsigned long long ull;
+
+int middle;
+
+int dist(int meio, int index){
+    if(meio >= index){
+        return (meio - index);
+    }else{
+        return (index - meio);
+    }
+}
+
+struct comp{
+    bool operator()(pair<int,int> a, pair<int,int> b){
+        if(a.first == b.first){//se a qtd de bolas no cesto for a msm...
+            if(dist(middle, a.second) == dist(middle, b.second)){//se a distancia dos cestos for igual...
+                return a.second < b.second; //olho pro indice.
+            }else if(dist(middle, a.second) < dist(middle, b.second)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        else if(a.first < b.first){
+            return true;
+        }else if(a.first > b.first){
+            return false;
+        }
+    }
+};
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    
+    int m, n;
+    cin >> m >> n;
+    //m = number of balls;
+    //n = number of baskets;
+    if(n == 1){
+        for(int i = 0; i < m; i++){
+            cout << "1" << "\n";
+        }
+    }
+    middle = (1 + n)/2;
+    priority_queue<pair<int,int>, vector<pair<int,int>>, comp> pq;
+    register int x = 1;
+    for(int i = 1; i <= n; i++){
+        pq.push({0,i});
+    }
+    for(int i = 0; i < m; i++){
+        pair<int,int> xesque = pq.top();
+        pq.pop();
+        cout << xesque.second << "\n";
+        xesque.first += 1;
+        pq.push(xesque);
+    }
+    return 0;
+}
