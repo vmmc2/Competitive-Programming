@@ -15,22 +15,17 @@ int dist[100000];
 
 void reset(){
     for(int i = 0; i < 100000; i++){
-        adjlist[i].clear();
         visitados[i] = 0;
         dist[i] = INF;
     }
     return;
 }
 
-pair<int,int> bfs(int source){ // pair[0] = qtd ---- pair[1] = dia.
+void bfs(int source){
     dist[source] = 0;
     queue<int> fila;
     visitados[source] = 1;
     fila.push(source);
-    pair<int,int> ss;
-    ss.first = -2;
-    ss.second = -2;
-    map<int,int> dict; //chave = layer/dia...  -- elemento = qtd de caras naquela layer
     while(!fila.empty()){
         int x = fila.front();
         fila.pop();
@@ -39,42 +34,55 @@ pair<int,int> bfs(int source){ // pair[0] = qtd ---- pair[1] = dia.
             if(visitados[u] == 0){
                 visitados[u] = 1;
                 fila.push(u);
-                dist[u] = min(dist[x] + 1, dist[u]);
-                dict[dist[u]]++;
+                dist[u] = min(dist[u], dist[x] + 1);
             }
         }
     }
-    for(map<int,int>::iterator it = dict.begin(); it != dict.end(); it++){
-        cout << it->first << " " << it->second << "\n";
-    }
-    return ss;
+    return;
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     
-    int numvertex, neigh;
-    cin >> numvertex;
-    for(int i = 0; i < numvertex; i++){
-        cin >> neigh;
-        for(int j = 0; j < neigh; j++){
-            int a;
-            cin >> a;
-            adjlist[i].push_back(a);
+    int numvertices;
+    int n, neigh;
+    cin >> numvertices;
+    for(int i = 0; i < numvertices; i++){
+        cin >> n;
+        for(int j = 0; j < n; j++){
+            cin >> neigh;
+            adjlist[i].push_back(neigh);
         }
     }
-    int numcasos;
-    cin >> numcasos;
-    for(int a = 1; a <= numcasos; a++){
-        reset();
-        int source;
+    int numqueries, source;
+    cin >> numqueries;
+    for(int i = 0; i < numqueries; i++){
         cin >> source;
-        pair<int,int> xesque = bfs(source);
-        /*if(xesque.first == -2 && xesque.second == - 2){
+        reset();
+        bfs(source);
+        /*for(int i = 0; i < numvertices; i++){
+            cout << dist[i] << " ";
+        }*/
+        map<int,int> dicio; //chave = numero do dia --- elemento: qtd de pessoas naquele dia.
+        for(int i = 0; i < numvertices; i++){
+            dicio[dist[i]]++;
+        }
+        if(dicio.size() == 2 && dicio.find(0) != dicio.end() && dicio.find(INF) != dicio.end()){
             cout << "0" << "\n";
         }else{
-            cout << xesque.first << " " << xesque.second << "\n";
+            dicio.erase(0);
+            int boom = -2, day = -2;
+            for(map<int,int>::iterator it = dicio.begin(); it != dicio.end(); it++){
+                if(it->second > boom){
+                    boom = it->second;
+                    day = it->first;
+                }
+            }
+            cout << boom << " " << day << "\n";
+        }
+        /*if(i < numqueries - 1){
+            cout << "\n";
         }*/
     }
     return 0;
