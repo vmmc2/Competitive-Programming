@@ -6,4 +6,4 @@ Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA and other o
 # LeetCode: 27 Problems Solved.
 # SPOJ: 13 Problems Solved.
 # TheHuxley: 252 Problems Solved.
-# UVA: 221 Problems Solved.
+# UVA: 222 Problems Solved.
