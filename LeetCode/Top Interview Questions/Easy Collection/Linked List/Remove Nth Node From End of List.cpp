@@ -15,18 +15,18 @@ public:
         for(int i = 1; i <= n; i++){
             sentinel = sentinel->next;
         }
-        /*
-        if(sentinel == NULL){ //quer dizer q eu tenho q deletar o ultimo elemento da minha lista
-            while(true){
-                if(delayed->next == NULL ) sit = 1;
-                if(delayed->next->next == NULL) sit = 2;
-                delayed = delayed->next;
-            }
-            if(sit == 1)delayed = delayed->next;
-            if(sit == 2)delayed = delayed->next->next;;
+        //Conner case em que temos 1 elemento na lista
+        if(head->next == NULL){
+            head = NULL;
             return head;
         }
-        */
+        //Conner case em que queremos deletar o primeiro elemento da lista.
+        if(sentinel == NULL){
+            cout << "entrei" << "\n";
+            delayed = delayed->next;
+            head = delayed;
+            return head;
+        }
         while(sentinel->next != NULL){
             sentinel = sentinel->next;
             delayed = delayed->next;
