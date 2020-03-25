@@ -1,5 +1,5 @@
 # Status
 
 # Easy Collection - 100%
-# Medium Collection - 14%
+# Medium Collection - 16%
 # Hard Collection - 0%
