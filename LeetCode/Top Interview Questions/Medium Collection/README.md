@@ -12,3 +12,8 @@
 # Top K Frequent Elements
 * Time Complexity -> O(n*Log(k))
 * Space Complexity -> O(n)
+
+# Increasing Triplet Subsequence
+* 1, If the item is smaller than minOne, we assign minOne to item because minOne records the minimal first item of the triplet.
+* 2, If the item is larger than minOne, we assign minTwo to Math.min(minTwo, item) because it means that it can be the 2nd item of the triplet and we use Math.min to find the smaller minTwo.
+* 3, If the item is larger than minTwo, we can say that we found the triplet and then we can return true to say there exists a triplet.
