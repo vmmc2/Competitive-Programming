@@ -8,3 +8,7 @@
 
 # Evaluate Reverse Polish Notation
 * Tem que ficar ligado com o lance de usar divisao por inteiro de python3 porque ela aplica o floor() no numero. Oq da merda quando estamos trabalhando com numeros negativos. Pra corrigir isso, quando tem um numero positivo e outro negativo com divisao a gente tira o abs() dos dois, efetua a divisao normalmente e dps multiplica o resultado por (-1) pra ficar negativo de novo.
+
+# Top K Frequent Elements
+* Time Complexity -> O(n*Log(k))
+* Space Complexity -> O(n)
