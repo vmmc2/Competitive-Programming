@@ -17,3 +17,9 @@
 * 1, If the item is smaller than minOne, we assign minOne to item because minOne records the minimal first item of the triplet.
 * 2, If the item is larger than minOne, we assign minTwo to Math.min(minTwo, item) because it means that it can be the 2nd item of the triplet and we use Math.min to find the smaller minTwo.
 * 3, If the item is larger than minTwo, we can say that we found the triplet and then we can return true to say there exists a triplet.
+
+# 3Sum
+* Primeiro passo para resolver o problema eh ordernar o array de forma crescente.
+* Em seguida, nos vamos iterar por todos os elementos do array desde o index 0 ate o index (n - 3) do array. Onde n eh o tamanho do nosso array.
+* Para cada elemento sobre o qual estamos iterando, fazemos o seguinte: setamos o index low para i + 1 e o index high para o (n - 1). Setamos nossa soma procurada da seguinte maneira: 0 - nums[i] e vamos iterando utilizando two pointers.
+* O principal problema eh retirar duplicatas. Para isso, quando achamos uma soma, nos vamos modificando low e high afim de tirar as duplicatas. Modificamos por meio do seguinte: low++ e high--.
