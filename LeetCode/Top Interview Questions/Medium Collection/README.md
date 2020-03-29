@@ -2,7 +2,7 @@
 
 # Kth Largest Element In An Array
 * A solucao mais direta possivel seria a seguinte: Realize um sort() no array, de forma que os numeros fiquem ordernados de forma crescente. E simplesmente retorne nums[tam - k]. Onde "tam" eh o tamanho do array. Essa solucao apresenta complexidade O(n*log(n)) e nao faz uso de memoria extra.
-* Existe uma segunda solucao que melhora a complexidade temporal, mas em troca (trade-off) exige mais memoria. Essa solucao funciona da seguinte forma: Criamos uma minHeap e vamos adicionando os elemnentos do nosso vetor nessa minHeap. A cada push() da minHeap, checamos para ver se o tamanho da nossa minHeap se tornou maior do que K. Caso sim, damos um pop(). Feito isso, teremos na raiz/root da nossa minHeap o Kth largest element e simplesmente retornamos minHeap.top(). A complexidade temporal melhora para: O(n*log(k)), entretanto a complexidade espacial piora para O(n).
+* Existe uma segunda solucao que melhora a complexidade temporal, mas em troca (trade-off) exige mais memoria. Essa solucao funciona da seguinte forma: Criamos uma minHeap e vamos adicionando os elementos do nosso vetor nessa minHeap. A cada push() da minHeap, checamos para ver se o tamanho da nossa minHeap se tornou maior do que K. Caso sim, damos um pop(). Feito isso, teremos na raiz/root da nossa minHeap o Kth largest element e simplesmente retornamos minHeap.top(). A complexidade temporal melhora para: O(n*log(k)), entretanto a complexidade espacial piora para O(n).
 
 # Find Peak Element
 * Nao coloque (mid - 1) pois dessa forma vc vai estar ignorando um possivel pico da sua solucao e isso vai dar RTE.
