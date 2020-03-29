@@ -7,6 +7,13 @@
 # Find Peak Element
 * Nao coloque (mid - 1) pois dessa forma vc vai estar ignorando um possivel pico da sua solucao e isso vai dar RTE.
 
+# 3Sum
+* Primeiro passo para resolver o problema eh ordernar o array de forma crescente.
+* Em seguida, nos vamos iterar por todos os elementos do array desde o index 0 ate o index (n - 3) do array. Onde n eh o tamanho do nosso array.
+* Quando a gente tiver iterando sobre cada elemento do nosso array dentro do for mais exterior, a gente tem que fazer um condicional importante que vai evitar que a gente lide com repeticoes no nosso vector "ans". A condicao eh a seguinte: if(i == 0 || (i > 0 && nums[i] != nums[i - 1])) ai a gente continua a fazer as paradas descritas abaixo dentro do escopo desse if statement.
+* Para cada elemento sobre o qual estamos iterando, fazemos o seguinte: setamos o index low para i + 1 e o index high para o (n - 1). Setamos nossa soma procurada da seguinte maneira: 0 - nums[i] e vamos iterando utilizando two pointers.
+* O principal problema eh retirar duplicatas. Para isso, quando achamos uma soma, nos vamos modificando low e high afim de tirar as duplicatas. Modificamos por meio do seguinte: low++ e high--.
+
 # Search In Sorted Rotated Array
 * Tentar achar o pico/breakpoint iterando eh uma ideia ruim porque isso vai levar a complexidade O(n), mesmo que a gente faca duas buscas binarias dps. A melhor maneira eh achar o breakpoint usando busca binaria tbm. Isso garante a complexidade O(log(n)).
 
@@ -21,9 +28,3 @@
 * 1, If the item is smaller than minOne, we assign minOne to item because minOne records the minimal first item of the triplet.
 * 2, If the item is larger than minOne, we assign minTwo to Math.min(minTwo, item) because it means that it can be the 2nd item of the triplet and we use Math.min to find the smaller minTwo.
 * 3, If the item is larger than minTwo, we can say that we found the triplet and then we can return true to say there exists a triplet.
-
-# 3Sum
-* Primeiro passo para resolver o problema eh ordernar o array de forma crescente.
-* Em seguida, nos vamos iterar por todos os elementos do array desde o index 0 ate o index (n - 3) do array. Onde n eh o tamanho do nosso array.
-* Para cada elemento sobre o qual estamos iterando, fazemos o seguinte: setamos o index low para i + 1 e o index high para o (n - 1). Setamos nossa soma procurada da seguinte maneira: 0 - nums[i] e vamos iterando utilizando two pointers.
-* O principal problema eh retirar duplicatas. Para isso, quando achamos uma soma, nos vamos modificando low e high afim de tirar as duplicatas. Modificamos por meio do seguinte: low++ e high--.
