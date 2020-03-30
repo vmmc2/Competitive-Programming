@@ -1,4 +1,9 @@
-# IMPORTANT NOTES
+# IMPORTANTE NOTES ABOUT C++ METHODS/FUNCTIONS/DATA STRUCTURES
+
+* C++ sort() method runs in O(n*log(n)) even in the worst case, this is valid from C++11 to later versions. In previous versions, the worst case ran in O(n^2).
+* C++ sort function uses introsort which is a hybrid algorithm. Different implementations use different algorithms. The GNU Standard C++ library, for example, uses a 3-part hybrid sorting algorithm: introsort is performed first (introsort itself being a hybrid of quicksort and heap sort) followed by an insertion sort on the result.
+
+# IMPORTANT NOTES ABOUT THE SOLVED PROBLEMS
 
 * Em questoes que envolvem strings e hashtables, sempre pergunte ao entrevistador se a string recebida como input eh formada por caracteres da tabela ASCII ou se eh formada por caracteres Unicode. Tambem pergunte oq devemos retornar caso a gente receba uma string vazia ("") como input. Finalmente, lembre-se que vc pode considerar a tabela ASCII (com 128 caracteres) como tambem da pra vc considerar a tabela ASCII extendida (256 caracteres).
 
