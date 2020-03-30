@@ -1,6 +1,6 @@
 # IMPORTANT NOTES
 
-* Em questoes que envolvem strings e hashtables, sempre pergunte ao entrevistador se a string recebida como input eh formada por caracteres da tabela ASCII ou se eh formada por caracteres Unicode. Tambem pergunte oq devemos retornar caso a gente receba uma string vazia ("") como input. Finalmente, lembre-se que vc pode considerar a tabela ASCII (com 128 caracteres) como tambem da pra eu considerar a tabela ASCII extendida (256 caracteres).
+* Em questoes que envolvem strings e hashtables, sempre pergunte ao entrevistador se a string recebida como input eh formada por caracteres da tabela ASCII ou se eh formada por caracteres Unicode. Tambem pergunte oq devemos retornar caso a gente receba uma string vazia ("") como input. Finalmente, lembre-se que vc pode considerar a tabela ASCII (com 128 caracteres) como tambem da pra vc considerar a tabela ASCII extendida (256 caracteres).
 
 * Nessa questao "String Compression" na hora de retornar string comprimida, existem 2 jeitos distintos. Um jeito eh ir concatenando diretamente em uma string que estava inicialmente vazia (finalstr = "") , so que esse nao eh um jeito bom. A complexidade disso eh quadratica. Existe um jeito mt mais simples e mais eficiente no qual no criamos uma lista inicialmente vazia e vamos dando append() nessa lista nas partes que usaremos para formar na string final. Para montar essa string final a gente usa o metodo join() da seguinte maneira:
 ------> "".join(lista_inicial). A complexidade melhora para linear O(n).
