@@ -3,7 +3,7 @@ Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA and other o
 
 # ATCoder: 6 Problems Solved.
 # Codeforces: 88 Problems Solved.
-# Cracking The Code: 19 Problems Solved.
+# Cracking The Code: 20 Problems Solved.
 # LeetCode: 74 Problems Solved.
 # SPOJ: 13 Problems Solved.
 # TheHuxley: 252 Problems Solved.
