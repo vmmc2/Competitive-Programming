@@ -31,13 +31,14 @@ class stack{
             }
             return head->data;
         }
-        void pop(){
+        T pop(){
             if(head == NULL || this->length == 0){
                 throw "Stack is empty.\n";
             }
+            struct node *temp = head;
             head = head->next;
             length--;
-            return;
+            return temp->data;
         }
         int size(){
             return this->length;
@@ -67,30 +68,32 @@ class SetofStacks{
         void push(T element){
             if(s[numberofstacks - 1].size() < capacity){
                 s[numberofstacks - 1].push(element);
-            }else if(s[numberofstacks - 1].size() == capacity){
+            }else if(s[numberofstacks - 1].size() >= capacity){
                 s.push_back(stack<T>());
                 numberofstacks++;
                 s[numberofstacks - 1].push(element);
             }
             return;
         }
-        void pop(){
+        T pop(){
+            T ret;
             if(s[numberofstacks - 1].isEmpty()){
                 s.pop_back();
                 numberofstacks--;
-                s[numberofstacks - 1].pop();
+                ret = s[numberofstacks - 1].pop();
             }else{
-               s[numberofstacks - 1].pop(); 
+                ret = s[numberofstacks - 1].pop(); 
             }
-            return;
+            return ret;
         }
-        void popAt(int index){
+        T popAt(int index){
+            T ret;
             if(index >= numberofstacks){
                 throw "Index out of bounds.\n";
             }else{
-                s[index].pop();
+                ret = s[index].pop();
             }
-            return;
+            return ret;
         }
 };
 
@@ -102,7 +105,11 @@ int main(){
     for(int i = 1; i <= 20; i++){
         s.push(i);
     }
-    
+    int first = s.popAt(0);
+    int sec = s.popAt(1);
+    cout << "first: " << first << ".\n";
+    cout << "second: " << sec << ".\n";
+    cout << s.popAt(0) << ".\n";
     
     return 0;
 }
