@@ -35,11 +35,27 @@ struct node* search(struct node *root, int target){
     return search(root->right, target);
 }
 
+void preorder_traversal(struct node *root){
+    if(root == NULL) return;
+    cout << root->data << " ";
+    preorder_traversal(root->left);
+    preorder_traversal(root->right);
+    return;
+}
+
 void inorder_traversal(struct node *root){
     if(root == NULL) return;
     inorder_traversal(root->left);
     cout << root->data << " ";
     inorder_traversal(root->right);
+    return;
+}
+
+void postorder_traversal(struct node *root){
+    if(root == NULL) return;
+    postorder_traversal(root->left);
+    postorder_traversal(root->right);
+    cout << root->data << " ";
     return;
 }
 
