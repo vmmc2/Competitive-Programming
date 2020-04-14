@@ -10,3 +10,8 @@ Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA and other o
 ## UVA: 222 Problems Solved.
 
 # TOTAL: 689 Problems Solved.
+
+## Useful Notes...
+* To convert a int to a string, use the function "to_string(int)" from the <string> library.
+* To split a string using blank spaces as the delimeters, use stringstream from the <sstream> library.
+* To convert a string to a int, use the function "stoi(string)" from the <string> library.
