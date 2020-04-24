@@ -1,5 +1,10 @@
 # IMPORTANT NOTES
 
+## About Using (Min/Max)-Heaps In Problems Involving Kth-(Largest/Smallest) Element Inside An Array.
+* If we want to find the Kth largest element of an array, we must use a min-heap of size K.
+* Otherwise, if we want to find the Kth smallest element of an array we must use a max-heap of size K. 
+* In both cases (Min-Heap or Max-Heap) we must push the element into our Heap. After that, we check if the size of our Heap is bigger than K. If that's the case, then we just do a pop() command. Otherwise, we continue doing the traversal through the input array.
+
 # Kth Largest Element In An Array
 * A solucao mais direta possivel seria a seguinte: Realize um sort() no array, de forma que os numeros fiquem ordernados de forma crescente. E simplesmente retorne nums[tam - k]. Onde "tam" eh o tamanho do array. Essa solucao apresenta complexidade O(n*log(n)) e nao faz uso de memoria extra. Ou seja, complexidade espacial: O(1).
 * Existe uma segunda solucao que melhora a complexidade temporal, mas em troca (trade-off) exige mais memoria. Essa solucao funciona da seguinte forma: Criamos uma minHeap e vamos adicionando os elementos do nosso vetor nessa minHeap. A cada push() da minHeap, checamos para ver se o tamanho da nossa minHeap se tornou maior do que K. Caso sim, damos um pop(). Feito isso, teremos na raiz/root da nossa minHeap o Kth largest element e simplesmente retornamos minHeap.top(). A complexidade temporal melhora para: O(n*log(k)), entretanto a complexidade espacial piora para O(n).
