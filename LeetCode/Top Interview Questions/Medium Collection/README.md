@@ -4,6 +4,9 @@
 * If we want to find the Kth largest element of an array, we must use a min-heap of size K.
 * Otherwise, if we want to find the Kth smallest element of an array we must use a max-heap of size K. 
 * In both cases (Min-Heap or Max-Heap) we must push the element into our Heap. After that, we check if the size of our Heap is bigger than K. If that's the case, then we just do a pop() command. Otherwise, we continue doing the traversal through the input array.
+* Another thing to take care in this type of problem is that we might have already added an element to our Heap and might encounter this same element again when doing the traversal of our array. So, to avoid adding repeated elements, we can just check it using a map/unordered_map or a set/unordered_set.
+* The time complexity of constructing this heap is: O(n*log(k)). But if K is known, then the time complexity will be just: O(n).
+* The space complexity of constructing this heap is O(k). Again, if K is known, then the space complexity will be just: O(1).
 
 # Kth Largest Element In An Array
 * A solucao mais direta possivel seria a seguinte: Realize um sort() no array, de forma que os numeros fiquem ordernados de forma crescente. E simplesmente retorne nums[tam - k]. Onde "tam" eh o tamanho do array. Essa solucao apresenta complexidade O(n*log(n)) e nao faz uso de memoria extra. Ou seja, complexidade espacial: O(1).
