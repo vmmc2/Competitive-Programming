@@ -2,4 +2,4 @@
 
 # Easy Collection - 100%
 # Medium Collection - 86%
-# Hard Collection - 18%
+# Hard Collection - 20%
