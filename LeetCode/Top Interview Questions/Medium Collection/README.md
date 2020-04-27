@@ -7,6 +7,7 @@
 * Another thing to take care in this type of problem is that we might have already added an element to our Heap and might encounter this same element again when doing the traversal of our array. So, to avoid adding repeated elements, we can just check it using a map/unordered_map or a set/unordered_set.
 * The time complexity of constructing this heap is: O(n*log(k)). But if K is known, then the time complexity will be just: O(n).
 * The space complexity of constructing this heap is O(k). Again, if K is known, then the space complexity will be just: O(1).
+* Final warning: About this question, it is a good idea to ask the interviewer if we should consider distinct elements or not. Because it is going to affect the solution.
 
 # Kth Largest Element In An Array
 * A solucao mais direta possivel seria a seguinte: Realize um sort() no array, de forma que os numeros fiquem ordernados de forma crescente. E simplesmente retorne nums[tam - k]. Onde "tam" eh o tamanho do array. Essa solucao apresenta complexidade O(n*log(n)) e nao faz uso de memoria extra. Ou seja, complexidade espacial: O(1).
