@@ -16,6 +16,12 @@
 # Find Peak Element
 * Nao coloque (mid - 1) pois dessa forma vc vai estar ignorando um possivel pico da sua solucao e isso vai dar RTE.
 
+# Word Search
+* Na questao Word Search, a cada iteracao do floodfill() marque o vertice como visitado, cheque se ele eh igual a letra da vez.
+* Se nao for, desmarque o vertice como visitado imediatamente e dê um return logo em seguida.
+* Cheque se vc ta na ultima letra da string e se a letra do board eh igual aquela letra especifica. Se for, marque a flag "found" como true e dê um return logo em seguida.
+* Ao final de cada iteracao do floodfill(), antes de dar o return tbm desmarque a busque para nao dar problema na hora de continuar a busca em outras iteracoes.
+
 # 3Sum
 * Primeiro passo para resolver o problema eh ordernar o array de forma crescente.
 * Em seguida, nos vamos iterar por todos os elementos do array desde o index 0 ate o index (n - 3) do array. Onde n eh o tamanho do nosso array.
