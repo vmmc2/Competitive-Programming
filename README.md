@@ -1,5 +1,5 @@
 # Competitive-Programming
-Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA and other online judges. It also contains solutions of LeetCode problems.
+Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA and other online judges. It also contains solutions of LeetCode problems...
 
 ## ATCoder: 6 Problems Solved.
 ## Codeforces: 91 Problems Solved.
