@@ -17,3 +17,23 @@ public:
         return ans;
     }
 };
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class Solution2 {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        uint32_t number;
+        for(int i = 1; i <= 32; i++){
+            if(i == 1){
+                number = (n & 1);
+            }else{
+                uint32_t bit = n & 1;
+                number = number | bit;
+            }
+            if(i == 32) break;
+            n = n >> 1;
+            number = number << 1;
+        }
+        return number;
+    }
+};
