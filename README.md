@@ -1,7 +1,7 @@
 # Competitive-Programming
 Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA and other online judges. It also contains solutions of LeetCode problems...
 
-## ATCoder: 10 Problems Solved.
+## ATCoder: 11 Problems Solved.
 ## Codeforces: 93 Problems Solved.
 ## Cracking The Code: 23 Problems Solved.
 ## LeetCode: 116 Problems Solved.
@@ -9,7 +9,7 @@ Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA and other o
 ## TheHuxley: 252 Problems Solved.
 ## UVA: 222 Problems Solved.
 
-# TOTAL: 729 Problems Solved.
+# TOTAL: 730 Problems Solved.
 
 ## Useful Notes:
 * To convert a int to a string, use the function "to_string(int)" from the < string > library.
