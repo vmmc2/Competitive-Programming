@@ -8,22 +8,31 @@ int main(){
     
     string s;
     cin >> s;
-    
     reverse(s.begin(), s.end());
     
-    if(s[0] != 'm' && s[0] != 'r' && s[0] != 'e'){
-        cout << "NO" << endl;
-    }else if(s[(int)s.size() - 1] != 'd' && s[(int)s.size() - 1] != 'e'){
-        cout << "NO" << endl;
-    }else{
-        int i = 0;
-        int limit = s.size() - 1;
-        while(){
-            
+    int tam = (int)s.size();
+    
+    
+    int i = 0;
+    while(i < tam){
+        if(tam - i < 5){
+            cout << "NO" << endl;
+            return 0;
+        }
+        if(s.substr(i, 5) == "maerd"){
+            i += 5;
+        }else if(s.substr(i, 7) == "remaerd"){
+            i += 7;
+        }else if(s.substr(i, 5) == "esare"){
+            i += 5;
+        }else if(s.substr(i, 6) == "resare"){
+            i += 6;
+        }else{
+            cout << "NO" << endl;
+            return 0;
         }
     }
-    
-    
+    cout << "YES" << endl;
     
     
     return 0;
