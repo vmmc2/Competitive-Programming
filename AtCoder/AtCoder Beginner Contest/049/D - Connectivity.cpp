@@ -4,42 +4,70 @@ using namespace std;
 
 typedef long long ll;
 
-vector<int> adjlistroad[300005];
-vector<int> adjlistrail[300005];
-int answer[300005] = {1};
-int visitados[3000]
+void dfs(int source, unordered_map<int,int> &visited, vector<vector<int>> &adjlist){
+    if(visited[source] == 1){
+        return;
+    }
+    visited[source] = 1;
+    for(int i = 0; i < (int)adjlist[source].size(); i++){
+        int x = adjlist[source][i];
+        if(visited[x] == 0){
+            dfs(x, visited, adjlist);
+        }
+    }
+    return;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     
     int n, k, l;
-    int from, to;
-    
     cin >> n >> k >> l;
-    vector<pair<int,int>> edges1(k);
-    vector<pair<int,int>> edges2(l);
     
-    for(int i = 0; i < k; i++){
-        cin >> edges1[i].first >> edges1[i].second;
-    }
-    sort(edges1.begin(), edges1.end());
-    for(int i = 0; i < k; i++){
-        adjlistroad[edges1[i].first].push_back(edges1[i].second);
-        adjlistroad[edges1[i].second].push_back(edges1[i].first);
-    }
+    vector<vector<int>> adjlistroad(n + 1);
+    vector<vector<int>> adjlistrail(n + 1);
+    unordered_map<int,int> visitedroad;
+    unordered_map<int,int> visitedrail;
+    vector<int> answer(n + 1, 0);
     
-    for(int i = 0; i < l; i++){
-        cin >> edges2[i].first >> edges[i].second;
+    int from, to;
+    for(int i = 0; i < k; i++){
+        cin >> from >> to;
+        adjlistroad[from].push_back(to);
+        adjlistroad[to].push_back(from);
     }
-    sort(edges2.begin(), edges2.end());
     for(int i = 0; i < l; i++){
-        adjlistrail[edges2[i].first].push_back(edges2[i].second);
-        adjlistrail[edges2[i].second].push_back(edges2[i].first);
+        cin >> from >> to;
+        adjlistrail[from].push_back(to);
+        adjlistrail[to].push_back(from);
     }
     
     for(int i = 1; i <= n; i++){
+        visitedroad.clear();
+        visitedrail.clear();
+        dfs(i, visitedroad, adjlistroad);
+        dfs(i, visitedrail, adjlistrail);
+        /*cout << "Partindo da cidade " << i << ": " << endl;
+        for(int k = 1; k <= n; k++){
+            cout << visitedroad[k] << " ";
+        }
+        cout << endl;
+        for(int k = 1; k <= n; k++){
+            cout << visitedrail[k] << " ";
+        }*/
+        /*cout << endl;
+        cout << endl;*/
+        for(unordered_map<int,int>::iterator it = visitedroad.begin(); it != visitedroad.end(); it++){
+            if(visitedrail[it->first] == 1){
+                answer[i]++;
+            }
+        }
         
+    }
+    
+    for(int i = 1; i <= n; i++){
+        cout << answer[i] << " ";
     }
     
     
