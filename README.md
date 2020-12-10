@@ -15,3 +15,12 @@ Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA, AtCoder an
 * To convert a int to a string, use the function ```to_string(int)``` from the ```<string>``` library.
 * To split a string using blank spaces as the delimeters, use stringstream from the ```<sstream>``` library.
 * To convert a string to a int, use the function ```stoi(string)``` from the ```<string>``` library.
+* Split a string into words using a specific delimiter:
+```c++
+        stringstream ss(s);
+        string word;
+        string delimiter = " ";
+        while(getline(ss, word, delimiter)){
+            words.push_back(word);
+        }
+```
