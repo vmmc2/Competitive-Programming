@@ -1,9 +1,7 @@
 #include <bits/stdc++.h>
+#include <sstream>
 
 using namespace std;
-
-typedef long long ll;
-typedef unsigned long long ull;
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -12,43 +10,37 @@ int main(){
     string s;
     cin >> s;
 
-    //Tratando dos corner cases antes.
     if((int)s.size() == 1){
-        if(stoi(s) % 8 == 0){
-            cout << "Yes" << endl;
-        }else{
-            cout << "No" << endl;
-        }
-        return 0;
+        if(stoi(s) % 8 == 0) cout << "Yes" << endl;
+        else cout << "No" << endl;
     }else if((int)s.size() == 2){
         if(stoi(s) % 8 == 0){
             cout << "Yes" << endl;
+        }else{
+            swap(s[0], s[1]);
+            if(stoi(s) % 8 == 0) cout << "Yes" << endl;
+            else cout << "No" << endl;
         }
-        swap(s[0], s[1]);
-        if(stoi(s) % 8 == 0) cout << "Yes" << endl;
-        else cout << "No" << endl;
-        return 0;
     }else{
+        int n = (int)s.size();
         vector<int> freq(10, 0);
-        for(auto x : s) freq[x - '0']++;
-
-        for(int i = 112; i < 1000; i += 8){
-            auto vs = freq;
-            string curr = to_string(i);
-            for(auto x : curr){
-                vs[x - '0']--;
-            }
-            bool ok = true;
-            for(auto s : vs){
-                if(s < 0) ok = false;
-            }
-            if(ok){
-                cout << "Yes" << endl;
-                return 0;
-            }
+        for(int i = 0; i < n; i++){
+            freq[s[i] - '0']++;
         }
+        bool found = true;
+        for(int i = 112; i < 1000; i += 8){
+            found = true;
+            auto v = freq;
+            string aux = to_string(i);
+            for(auto x : aux) v[x - '0']--;
+            for(int j = 0; j < v.size(); j++){
+                if(v[j] < 0) found = false;
+            }
+            if(found == true) break;
+        }
+        if(found == true) cout << "Yes" << endl;
+        else cout << "No" << endl;
     }
-    cout << "No" << endl;
 
     return 0;
 }
