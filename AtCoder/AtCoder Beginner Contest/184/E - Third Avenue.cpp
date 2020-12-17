@@ -48,38 +48,23 @@ int main(){
             int newx = daVez.first + dx[i];
             int newy = daVez.second + dy[i];
             if(newx >= 0 && newx < h && newy >= 0 && newy < w && grid[newx][newy] != '#' && visited[newx][newy] == false){
-                if(grid[newx][newy] == '.' || grid[newx][newy] == 'G'){
-                    visited[newx][newy] = true;
-                    dist[newx][newy] = min(dist[newx][newy], 1 + dist[daVez.first][daVez.second]);
-                    fila.push({newx, newy});
-                }else if(grid[newx][newy] >= 'a' && grid[newx][newy] <= 'z'){
-                    visited[newx][newy] = true;
-                    dist[newx][newy] = min(dist[newx][newy], 1 + dist[daVez.first][daVez.second]);
-                    fila.push({newx, newy});
-                    vector<pair<int,int>> lista = dict[grid[newx][newy]];
-                    //cout << "Lista Size: " << lista.size() << " pertence a letra: " << grid[newx][newy] << endl;
-                    for(auto par : lista){
-                        if(visited[par.first][par.second] == false){
-                            //cout << "Dale" << endl;
-                            visited[par.first][par.second] = true;
-                            dist[par.first][par.second] = min(dist[par.first][par.second], 1 + dist[newx][newy]);
-                            fila.push({par.first, par.second});
-                        }
-                    }
-                }
-
+                visited[newx][newy] = true;
+                dist[newx][newy] = min(dist[newx][newy], 1 + dist[daVez.first][daVez.second]);
+                fila.push({newx, newy});
             }
         }
-    }
-    /*
-    for(int i = 0; i < h; i++){
-        for(int j = 0; j < w; j++){
-            cout << dist[i][j] << " ";
+        if(grid[daVez.first][daVez.second] >= 'a' && grid[daVez.first][daVez.second] <= 'z'){
+            vector<pair<int,int>> lista = dict[grid[daVez.first][daVez.second]];
+            for(auto par : lista){
+                if(visited[par.first][par.second] == false){
+                    visited[par.first][par.second] = true;
+                    dist[par.first][par.second] = min(dist[par.first][par.second], 1 + dist[daVez.first][daVez.second]);
+                    fila.push({par.first, par.second});
+                }
+            }
+            dict.erase(grid[daVez.first][daVez.second]); //Como ja visitei todos as celulas que estao associadas ao teleporte, posso retira-las para n ter que visita-las duas vezes.
         }
-        cout << endl;
     }
-    */
-
 
     if(dist[goal.first][goal.second] != INF){
         cout << dist[goal.first][goal.second] << endl;
