@@ -1,3 +1,5 @@
+from collections import counter
+
 class Solution:
     def uncommonFromSentences(self, A: str, B: str) -> List[str]:
         l1 = A.split(" ")
