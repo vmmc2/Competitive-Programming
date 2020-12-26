@@ -11,4 +11,5 @@ public:
         answer = a - b;
         return answer;
     }
+    //Time Complexity: O(log n) -> At base 10.
 };
