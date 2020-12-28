@@ -1,12 +1,14 @@
 #include <bits/stdc++.h>
 #include <sstream>
-
+ 
 using namespace std;
-
+ 
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double dl;
-
+ 
+unordered_map<int,int> dict[210000];
+ 
 class dsu{
     private:
         vector<int> p;
@@ -34,9 +36,15 @@ class dsu{
                 if(size[rootA] <= size[rootB]){
                     p[rootA] = rootB;
                     size[rootB] += size[rootA];
+                    for(unordered_map<int,int>::iterator it = dict[rootA].begin(); it != dict[rootA].end(); it++){
+                        dict[rootB][it->first] += it->second;
+                    }
                 }else{
                     p[rootB] = rootA;
                     size[rootA] += size[rootB];
+                    for(unordered_map<int,int>::iterator it = dict[rootB].begin(); it != dict[rootB].end(); it++){
+                        dict[rootA][it->first] += it->second;
+                    }
                 }
             }
             return;
@@ -46,23 +54,22 @@ class dsu{
             return size[rootX];
         }
 };
-
-
+ 
+ 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-
-    unordered_map<int,vector<int>> dict;
-
+ 
+ 
     int n, q;
     cin >> n >> q;
     
     vector<int> v(n);
     dsu uf(n + 1);
-
+ 
     for(int i = 0; i < n; i++){
         cin >> v[i];
-        dict[v[i]].push_back(i + 1);
+        dict[i + 1][v[i]] = 1;
     }
     int tp, x, y;
     for(int i = 0; i < q; i++){
@@ -70,18 +77,10 @@ int main(){
         if(tp == 1){
             uf.unite(x, y);
         }else if(tp == 2){
-            int answer = 0;
-            vector<int> aux = dict[y];
-            for(int j = 0; j < (int)aux.size(); j++){
-                if(uf.get(aux[j]) == uf.get(x)){
-                    answer++;
-                    //cout << aux[j] << " e " << x << " satisfazem as condicoes!" << endl;
-                }
-            }
-            cout << answer << endl;
+            cout << dict[uf.get(x)][y] << endl;
         }
     }
-
-
+ 
+ 
     return 0;
 }
