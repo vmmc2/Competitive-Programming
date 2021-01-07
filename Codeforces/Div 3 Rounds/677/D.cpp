@@ -63,7 +63,6 @@ int main(){
             }
         }
         dsu uf(n);
-        sort(edges.begin(), edges.end());
         int counter = 0;
         for(int i = 0; i < (int)edges.size(); i++){
             if(counter == n - 1) break;
