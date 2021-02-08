@@ -1,4 +1,3 @@
 ## Problem D
 - Firstly, let's check if the initial n fits the conditions. If it is, print 0 and continue. Otherwise, let's solve the problem greedily. At first, let's try to set the last digit to zero. Let dig=nmod10. We need exactly (10−dig)mod10 moves to do that. Let's add this number to n and to the answer and check if the current n fits the conditions. If it isn't, let's try to set the previous last digit to zero. Let dig=⌊n10⌋mod10. Then we need ((10−dig)mod10)⋅10 moves to do that. Let's add this number to n and to the answer and check if the current n fits the conditions. If it isn't, repeat the same with the third digit and so on. This cycle can do no more than 18 iterations. And we can fing the sum of digits of n in at most 18 iterations too (decimal logarithm of n).
-
-So, the total time complexity is O(log210(n)).
+- So, the total time complexity is O(log210(n)).
