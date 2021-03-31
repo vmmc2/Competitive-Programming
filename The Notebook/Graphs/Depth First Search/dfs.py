@@ -8,10 +8,10 @@ def initializeVisited(numVertex):
 
 def dfs(adjList, source):
     global visited 
-    visited[source] = 1
+    visited[source] = 1 # To change the content of a global variable in Python, one must use the keyword "global"
     for i in range(0, len(adjList[source])):
         u = adjList[source][i]
-        if visited[u] == 0:
+        if visited[u] == 0: # Not necessary to use the keyword "global" here because we are just getting its value. 
             dfs(u)
     return
 
