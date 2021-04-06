@@ -8,6 +8,8 @@ using namespace std;
 // ser divididos em dois conjuntos de vertices disjuntos tais que:                          //
 // 1) Cada vertice do grafo pertence a apenas um desses 2 conjuntos.                        //
 // 2) Cada aresta do grafo conecta vertices de dois conjuntos diferentes.                   //
+// Perceba que esse teste tambem vale para grafos que possuem mais de uma componente conexa.//
+// Nesse caso, temos que testar as duas condicoes para todas as componentes conexas.        //
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 bool dfsCheckBipartite(int source, int color, vector<vector<int>> &adjlist, vector<bool> &visited, vector<int> &colors){
