@@ -16,7 +16,7 @@ bool dfsCheckBipartite(int source, int color, vector<vector<int>> &adjlist, vect
   for(int i = 0; i < (int)adjlist[source].size(); i++){
     int u = adjlist[source][i];
     if(visited[u] == false){
-      if(dfs(u, color ^ 1, adjlist, visited, colors) == false) return false;
+      if(dfsCheckBipartite(u, color ^ 1, adjlist, visited, colors) == false) return false;
     }else{
       if(colors[source] == colors[u]) return false;
     }
