@@ -6,11 +6,11 @@ Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA, AtCoder an
 ## Codeforces: 130 Problems Solved.
 ## Cracking The Code: 23 Problems Solved.
 ## LeetCode: 208 Problems Solved.
-## SPOJ: 20 Problems Solved.
+## SPOJ: 21 Problems Solved.
 ## TheHuxley: 258 Problems Solved.
 ## UVA: 222 Problems Solved.
 
-# TOTAL PROBLEMS: 924 Problems Solved.
+# TOTAL PROBLEMS: 925 Problems Solved.
 
 ## Useful Notes:
 * To convert a int to a string, use the function ```to_string(int)``` from the ```<string>``` library.
