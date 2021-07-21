@@ -12,6 +12,7 @@
 class Solution {
 public:
     string buildString(TreeNode* root, int layer, bool isLeft){
+        //Todos esses "else if" podem ser substituidos apenas por "if".
         if(root == NULL && isLeft == true) return "()";
         else if(root == NULL && isLeft == false) return "";
         else if(layer == 1 && root->left == NULL && root->right == NULL){
