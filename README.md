@@ -3,7 +3,7 @@ Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA, AtCoder an
 
 ## AtCoder: 61 Problems Solved.
 ## CodeChef: 1 Problem Solved.
-## Codeforces: 143 Problems Solved.
+## Codeforces: 149 Problems Solved.
 ## Cracking The Code: 23 Problems Solved.
 ## LeetCode: 271 Problems Solved.
 ## SPOJ: 23 Problems Solved.
