@@ -1,29 +1,4 @@
-#include <bits/stdc++.h>
-#include <sstream>
- 
-using namespace std;
- 
-class dsu{
-    private:
-        vector<int> uf;
-        vector<int> sz;
-    public:
-        dsu(int n){
-            uf.resize(n);
-            sz.resize(n);
-            for(int i = 0; i < n; i++){
-                uf[i] = i;
-                sz[i] = 1;
-            }
-        }
-        int root(int x){
-            while(x != uf[x]){
-                uf[x] = uf[uf[x]];
-                x = uf[x];
-            }
-            return uf[x];
-        }
-        void unite(int a, int b){
+ unite(int a, int b){
             int rootA = root(a);
             int rootB = root(b);
             if(rootA != rootB){
@@ -46,6 +21,7 @@ int main(){
     int n, m;
     int numLang, langID;
     int cntGroups = 0;
+    int numZeroes = 0;
  
     cin >> n >> m;
  
@@ -54,6 +30,7 @@ int main(){
  
     for(int i = 0; i < n; i++){
         cin >> numLang;
+        if(numLang == 0) numZeroes++;
         for(int j = 0; j < numLang; j++){
             cin >> langID;
             v[i].insert(langID);
@@ -70,11 +47,14 @@ int main(){
             }
         }
     }
-    for(int i = 0; i < n; i++){
-        if(i == union_find.root(i)) cntGroups++;
+    if(numZeroes == n){
+        cout << n << endl;
+    }else{
+        for(int i = 0; i < n; i++){
+            if(i == union_find.root(i)) cntGroups++;
+        }
+        cout << cntGroups - 1 << endl;
     }
- 
-    cout << cntGroups - 1 << endl;
  
     return 0;
 }
