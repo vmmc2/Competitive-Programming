@@ -5,12 +5,12 @@ Solutions for Programming Problems from Codeforces, Iudex, SPOJ, UVA, AtCoder an
 ## CodeChef: 1 Problem Solved.
 ## Codeforces: 161 Problems Solved.
 ## Cracking The Code: 23 Problems Solved.
-## LeetCode: 280 Problems Solved.
+## LeetCode: 284 Problems Solved.
 ## SPOJ: 23 Problems Solved.
 ## TheHuxley: 258 Problems Solved.
 ## UVA: 222 Problems Solved.
 
-# TOTAL PROBLEMS: 1033 Problems Solved.
+# TOTAL PROBLEMS: 1037 Problems Solved.
 
 ## Useful Notes:
 * To convert a int to a string, use the function ```to_string(int)``` from the ```<string>``` library.
